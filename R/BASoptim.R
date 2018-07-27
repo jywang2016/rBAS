@@ -41,6 +41,8 @@
 #'          lower = c(-6,0), upper = c(-1,2),
 #'          seed = 1, n = 100)
 #' #======== examples end =======================
+#' @importFrom stats runif
+#' @export
 BASoptim <- function(fn,init = NULL,
                      lower = c(-6,0),upper = c(-1,2),
                      d0 = 0.001, d1 = 3, eta_d = 0.95,

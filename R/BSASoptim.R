@@ -37,10 +37,11 @@
 #' @param n_flag an positive integer; default = 2; If step-size doesn't update for successive n_flag times because p_step is 
 #' larger than random generated value, the step-size will be forced updating. If you set a large p_step, set a small n_flag
 #' is suggested.
-#'  
+#' @param k a positive integer.\emph{k} is the number of beetles for exploring in every iteration.
 #' @return A list including best beetle position (parameters) and corresponding objective function value.
 #' @references X. Y. Jiang, and S. Li, BAS: beetle antennae search algorithm for
 #' optimization problems, arXiv:1710.10724v1.
+#' @importFrom stats runif
 #' @examples 
 #' #======== examples start =======================
 #' # BSAS application on Michalewicz function
@@ -54,6 +55,7 @@
 #'           lower = c(-6,0), upper = c(-1,2),
 #'           seed = 12, n = 100,k=5)
 #' #======== examples end =======================
+#' @export
 BSASoptim <- function(fn,init = NULL,
                       lower = c(-6,0),upper = c(-1,2),
                       k = 5, 

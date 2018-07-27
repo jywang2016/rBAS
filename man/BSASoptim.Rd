@@ -21,6 +21,8 @@ of your problem.}
 
 \item{upper}{upper of parameters; Default = c(-1,2).}
 
+\item{k}{a positive integer.\emph{k} is the number of beetles for exploring in every iteration.}
+
 \item{d0}{a constant to gurantee that sensing length of antennae \emph{d} doesn't equal to
 zero. More specifically, \deqn{d^t = \eta_d * d^{t-1} + d_0}where attenuation coefficient
  \eqn{\eta_d} belongs to \eqn{[0,1]}}
