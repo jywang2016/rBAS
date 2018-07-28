@@ -362,5 +362,3 @@ License
 -------
 
 The project is released under the terms of the GPL-3.0.
-
-Copyright © 2018 Jiangyu Wang
