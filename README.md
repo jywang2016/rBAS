@@ -17,6 +17,7 @@ An R module aimed at implementation of Beetle Antennae Search (BAS) Algorithm an
     -   [Implementation of BSAS](#bsas-algorithm)
 -   [To do list](#to-do-list)
 -   [Author](#author)
+-   [Citation](#citation)
 -   [License](#license)
 
 Installation
@@ -46,10 +47,11 @@ The paper may be listed on arxiv soon. If you want to find materials in Chinese 
 Examples
 --------
 
-Use `help()` to see the document pages about function in `rBAS`.
+Use `help()` to see the document pages about functions in `rBAS`.
 
 ``` r
-library(rBAS)
+library(rBAS) #load package
+
 help(BASoptim)
 help(BSASoptim)
 ```
@@ -321,13 +323,40 @@ You can list your requirement in the [issues](https://github.com/jywang2016/rBAS
 Author
 ------
 
-[Jiangyu Wang](https://github.com/jywang2016)
+`Jiangyu Wang`
+
+[github page](https://github.com/jywang2016)
 
 *School of Energy and Power Engineering, Huazhong University of Science and Technology*
 
-Shuai Li
+`Shuai Li`
+
+-   [personal homepage](http://www4.comp.polyu.edu.hk/~cssli/)
+
+-   [Googlescholar](http://scholar.google.com/citations?hl=zh-CN&user=H8UOWqoAAAAJ)
 
 *Department of Computing, The Hong Kong Polytechnic University*
+
+Citation
+--------
+
+``` r
+citation(package = 'rBAS')
+#> 
+#> To cite package 'rBAS' in publications use:
+#> 
+#>   Jiangyu Wang and Shuai Li (2018). rBAS: Implementation of the
+#>   BAS algorithm and its mutation. R package version 0.0.0.9000.
+#> 
+#> A BibTeX entry for LaTeX users is
+#> 
+#>   @Manual{,
+#>     title = {rBAS: Implementation of the BAS algorithm and its mutation},
+#>     author = {Jiangyu Wang and Shuai Li},
+#>     year = {2018},
+#>     note = {R package version 0.0.0.9000},
+#>   }
+```
 
 License
 -------

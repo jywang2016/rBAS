@@ -24,6 +24,7 @@ An R module aimed at implementation of Beetle Antennae Search (BAS) Algorithm an
     -   [Implementation of BSAS](#bsas-algorithm)
 -   [To do list](#to-do-list)
 -   [Author](#author)
+-   [Citation](#citation)
 -   [License](#license)
 
 ## Installation
@@ -123,13 +124,26 @@ BSASoptim(fn = gold,
 You can list your requirement in the [issues](https://github.com/jywang2016/rBAS/issues). Furthermore, if you have a good idea or codes about BAS's mutations, pull requests and discussion are welcome. Contact me by email: jywang_2016@hust.edu.cn
 
 ## Author
-[Jiangyu Wang](https://github.com/jywang2016)
+`Jiangyu Wang`
+
+[github page](https://github.com/jywang2016)
 
 *School of Energy and Power Engineering, Huazhong University of Science and Technology*
 
-Shuai Li
+`Shuai Li`   
+
+-   [personal homepage](http://www4.comp.polyu.edu.hk/~cssli/) 
+
+-   [Googlescholar](http://scholar.google.com/citations?hl=zh-CN&user=H8UOWqoAAAAJ)
 
 *Department of Computing, The Hong Kong Polytechnic University*
+
+## Citation
+
+```{r}
+citation(package = 'rBAS')
+```
+
 
 ## License
 
