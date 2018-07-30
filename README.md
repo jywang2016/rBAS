@@ -38,7 +38,8 @@ Algorithm
 
 ### BSAS
 
-The paper may be listed on arxiv soon. If you want to find materials in Chinese about BSAS, please click [here](https://github.com/jywang2016/BAS/blob/master/BAS_Swarm_documentation.html).
+[J. Y. Wang, and H. X. Chen, “BSAS: Beetle Swarm Antennae Search Algorithm for Optimization Problems,” arXiv:1807.10470v1.](https://arxiv.org/abs/1807.10470)
+If you want to find materials in Chinese about BSAS, please click [here](https://github.com/jywang2016/BAS/blob/master/BAS_Swarm_documentation.html).
 
 ### BAS-WPT
 
