@@ -4,19 +4,20 @@
 \alias{BSASoptim}
 \title{Implementation of the Beetle Swarm Antennae Search (BSAS) algorithm for optimization problems.}
 \usage{
-BSASoptim(fn, init = NULL, lower = c(-6, 0), upper = c(-1, 2), k = 5,
-  d0 = 0.001, d1 = 3, eta_d = 0.95, l0 = 0, l1 = 0, eta_l = 0.95,
-  step = 0.8, eta_step = 0.95, n = 200, seed = NULL, trace = T,
-  steptol = 0.01, p_min = 0.2, p_step = 0.2, n_flag = 2)
+BSASoptim(fn, init = NULL, lower = c(-6, 0), upper = c(-1, 2),
+  k = 5, d0 = 0.001, d1 = 3, eta_d = 0.95, l0 = 0, l1 = 0,
+  eta_l = 0.95, step = 0.8, eta_step = 0.95, n = 200,
+  seed = NULL, trace = T, steptol = 0.01, p_min = 0.2,
+  p_step = 0.2, n_flag = 2)
 }
 \arguments{
 \item{fn}{objective function; function need to be optimized}
 
 \item{init}{default = NULL, it will generate randomly; Of course, you can specify it.}
 
-\item{lower}{lower of parameters to be estimated; Default = c(-6,0) because of the test on 
-Michalewicz function of which thelower is c(-6,0); By the way, you should set one of 
-\emph{init} or \emph{lower} parameter at least to make the code know the dimensionality 
+\item{lower}{lower of parameters to be estimated; Default = c(-6,0) because of the test on
+Michalewicz function of which thelower is c(-6,0); By the way, you should set one of
+\emph{init} or \emph{lower} parameter at least to make the code know the dimensionality
 of your problem.}
 
 \item{upper}{upper of parameters; Default = c(-1,2).}
@@ -63,7 +64,7 @@ the next position of the beetle could be the random position within better posit
 there is still a samll probability that step-size doesn't update. If you set a little \emph{k}, you could set p_step
 slightly large.}
 
-\item{n_flag}{an positive integer; default = 2; If step-size doesn't update for successive n_flag times because p_step is 
+\item{n_flag}{an positive integer; default = 2; If step-size doesn't update for successive n_flag times because p_step is
 larger than random generated value, the step-size will be forced updating. If you set a large p_step, set a small n_flag
 is suggested.}
 }

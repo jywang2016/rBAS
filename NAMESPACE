@@ -2,4 +2,9 @@
 
 export(BASoptim)
 export(BSASoptim)
+export(run_BAS_App)
+import(ggplot2)
+import(shiny)
+import(shinythemes)
+importFrom(reshape2,melt)
 importFrom(stats,runif)

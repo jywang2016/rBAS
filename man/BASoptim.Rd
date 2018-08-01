@@ -5,18 +5,18 @@
 \title{Implementation of the BAS algorithm for optimization problems.}
 \usage{
 BASoptim(fn, init = NULL, lower = c(-6, 0), upper = c(-1, 2),
-  d0 = 0.001, d1 = 3, eta_d = 0.95, l0 = 0, l1 = 0, eta_l = 0.95,
-  step = 0.8, eta_step = 0.95, n = 200, seed = NULL, trace = T,
-  steptol = 0.01)
+  d0 = 0.001, d1 = 3, eta_d = 0.95, l0 = 0, l1 = 0,
+  eta_l = 0.95, step = 0.8, eta_step = 0.95, n = 200,
+  seed = NULL, trace = T, steptol = 0.01)
 }
 \arguments{
 \item{fn}{objective function; function need to be optimized}
 
 \item{init}{default = NULL, it will generate randomly; Of course, you can specify it.}
 
-\item{lower}{lower of parameters to be estimated; Default = c(-6,0) because of the test on 
-Michalewicz function of which thelower is c(-6,0); By the way, you should set one of 
-\emph{init} or \emph{lower} parameter at least to make the code know the dimensionality 
+\item{lower}{lower of parameters to be estimated; Default = c(-6,0) because of the test on
+Michalewicz function of which thelower is c(-6,0); By the way, you should set one of
+\emph{init} or \emph{lower} parameter at least to make the code know the dimensionality
 of your problem.}
 
 \item{upper}{upper of parameters; Default = c(-1,2).}

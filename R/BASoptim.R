@@ -1,11 +1,11 @@
-#' Implementation of the BAS algorithm for optimization problems. 
-#' 
+#' Implementation of the BAS algorithm for optimization problems.
+#'
 #' @description You could find more information about BAS in \url{https://arxiv.org/abs/1710.10724}.
 #' @param fn objective function; function need to be optimized
 #' @param init default = NULL, it will generate randomly; Of course, you can specify it.
-#' @param lower lower of parameters to be estimated; Default = c(-6,0) because of the test on 
-#' Michalewicz function of which thelower is c(-6,0); By the way, you should set one of 
-#' \emph{init} or \emph{lower} parameter at least to make the code know the dimensionality 
+#' @param lower lower of parameters to be estimated; Default = c(-6,0) because of the test on
+#' Michalewicz function of which thelower is c(-6,0); By the way, you should set one of
+#' \emph{init} or \emph{lower} parameter at least to make the code know the dimensionality
 #' of your problem.
 #' @param upper upper of parameters; Default = c(-1,2).
 #' @param d0 a constant to gurantee that sensing length of antennae \emph{d} doesn't equal to
@@ -28,7 +28,7 @@
 #' @references X. Y. Jiang, and S. Li, BAS: beetle antennae search algorithm for
 #' optimization problems, arXiv:1710.10724v1.
 #' @return A list including best beetle position (parameters) and corresponding objective function value.
-#' @examples 
+#' @examples
 #' #======== examples start =======================
 #' # BAS application on Michalewicz function
 #' library(rBAS)
@@ -61,7 +61,7 @@ BASoptim <- function(fn,init = NULL,
   }else{
     x0 <- init
   }
-  
+
   if(!is.null(names(lower))){
     names(x0) <- names(lower)
   }
@@ -72,8 +72,12 @@ BASoptim <- function(fn,init = NULL,
   if(trace){
     cat('Iter: ',0,' xbest: ','[',xbest,'], fbest= ',fbest,'\n')
   }
-  
-  
+
+  x_store <- x
+  f_store <- fbest
+  fb_store <- fbest
+  xb_store <- xbest
+
   handle.bounds <- function(u){
     temp <- u - step * dir * sign(fleft - fright) + w
     bad <- temp > upper
@@ -86,14 +90,14 @@ BASoptim <- function(fn,init = NULL,
     }
     temp
   }
-  
-  
+
+
   # iteration loop -----------------------------------
   for (i in 1:n){
     #normalized direction
     dir <- runif(min = -1,max = 1, n = npar)
     dir <- dir/(1e-16 + sqrt(sum(dir^2)))
-    
+
     #left-hand side and right-hand side
     xleft <- x + dir * d
     #xleft <- handle.bounds.LR(x,act_dir = 'left')
@@ -101,37 +105,52 @@ BASoptim <- function(fn,init = NULL,
     xright <- x - dir*d
     #xright <- handle.bounds.LR(x,act_dir = 'right')
     fright <- fn(xright)
-    
+
     #random work
     w <- l*runif(min = -1,max = 1, n = npar)
     x <- handle.bounds(u = x)
     f <- fn(x)
-    
+
     # best position updates
     if (f < fbest){
       xbest <- x
       fbest <- f
     }
-    
+
+    x_store <- c(x_store,x)
+    f_store <- c(f_store,f)
+    fb_store <- c(fb_store,fbest)
+    xb_store <- c(xb_store,xbest)
+
     # trace
     if(trace){
       cat('Iter: ',i,' xbest: ','[',xbest,'], fbest= ',fbest,'\n')
     }
-    
+
     #d update
     d <- d * eta_d + d0
     #l update
     l <- l * eta_l + l0
     #step update
     step <- step*eta_step
-    
+
     if(step < steptol){
-      message('----step < steptol----','-----stop the iteration------\n')
+      if(trace){
+        message('----step < steptol----','-----stop the iteration------\n')
+      }
       break
     }
-  } 
-  
+  }
+  x_store <- matrix(x_store,ncol = npar, byrow = T)
+  f_store <- matrix(f_store,ncol = 1, byrow = T)
+  xbest_store <- matrix(xb_store, ncol = npar, byrow = T)
+  fbest_store <- matrix(fb_store, ncol = 1, byrow = T)
+
   result <- list(par = xbest,
-                 value = fbest)
+                 value = fbest,
+                 df = list(x = x_store,
+                           f = f_store,
+                           xbest = xbest_store,
+                           fbest = fbest_store))
   return(result)
 }

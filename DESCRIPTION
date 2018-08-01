@@ -1,6 +1,6 @@
 Package: rBAS
 Title: Implementation of the BAS algorithm and its mutation
-Version: 0.0.0.9000
+Version: 0.1.0
 Authors@R: c(person("Jiangyu", "Wang", email = "jywang_2016@hust.edu.cn", role = c("aut","cre")),person("Shuai", "Li", email = "shuaili@polyu.edu.hk", role = c("aut")))
 Description: An implementation of the Beetle Antennae Search algorithm and its mutation version, for example, Beetle Swarm Antennae Search(BSAS) algorithm. You can use this package to solve complex optimization problems.
 Depends: R (>= 3.5.0)
@@ -8,4 +8,7 @@ Date: 2018-07-28
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
+Imports: shiny,ggplot2,shinythemes,reshape2
+URL: https://github.com/jywang2016/rBAS
+BugReports: https://github.com/jywang2016/rBAS/issues
