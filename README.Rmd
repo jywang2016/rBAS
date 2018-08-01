@@ -22,6 +22,10 @@ An R module aimed at implementation of Beetle Antennae Search (BAS) Algorithm an
     -   [Michalewicz function](#michalewicz-function)
     -   [Goldstein-Price function](#goldstein-price-function)
     -   [Implementation of BSAS](#bsas-algorithm)
+    -   [Shiny interface](#shiny-interface)
+        -   [Theme: united](#theme-united)
+        -   [Theme: flatly](#theme-flatly)
+        -   [Theme: spacelab](#theme-spacelab)
 -   [To do list](#to-do-list)
 -   [Author](#author)
 -   [Citation](#citation)
@@ -40,7 +44,7 @@ devtools::install_github("jywang2016/rBAS")
 optimization problems,” arXiv:1710.10724v1.](https://arxiv.org/abs/1710.10724)
 
 ### BSAS
-The paper may be listed on arxiv soon. If you want to find materials in Chinese about BSAS,
+[J. Y. Wang, and H. X. Chen, “BSAS: Beetle Swarm Antennae Search Algorithm for Optimization Problems,” arXiv:1807.10470v1.](https://arxiv.org/abs/1807.10470) If you want to find materials in Chinese about BSAS,
 please click [here](https://github.com/jywang2016/BAS/blob/master/BAS_Swarm_documentation.html).
 
 ### BAS-WPT
@@ -74,9 +78,14 @@ mich <- function(x){
 ```
 
 ```{r}
-BASoptim(fn = mich,
-         lower = c(-6,0), upper = c(-1,2),
-         seed = 1, n = 100)
+test<-
+  BASoptim(fn = mich,
+           lower = c(-6,0), upper = c(-1,2),
+           seed = 1, n = 100,trace = F)
+
+test$par
+test$value
+summary(test$df)
 ```
 
 ### Goldstein-Price function
@@ -92,36 +101,82 @@ gold <- function(x){
 ```
 
 ```{r}
-BASoptim(fn = gold,
-         lower = c(-2,-2), upper = c(2,2),
-         seed = NULL, n = 100)
+test<-
+  BASoptim(fn = gold,
+           lower = c(-2,-2), upper = c(2,2),
+           seed = NULL, n = 100,trace = F)
+
+test$par
+test$value
+summary(test$df)
 ```
 
 ### BSAS algorithm
 
 In order to save space, the BSAS algorithm code is executed with `trace` as `FALSE` because of too much trace information. You can set `trace` to `TRUE` and observe the trace messages.
 ```{r}
-BSASoptim(fn = mich,
-          lower = c(-6,0), upper = c(-1,2),
-          seed = 12, n = 100,k=5,
-          trace = F)
+test<-
+  BSASoptim(fn = mich,
+            lower = c(-6,0), upper = c(-1,2),
+            seed = 12, n = 100,k=5,
+            trace = F)
+
+test$par
+test$value
+summary(test$df)
 ```
 
 ```{r}
-BSASoptim(fn = gold,
-          lower = c(-2,-2), upper = c(2,2),
-          seed = 11, n = 100,k=2,
-          trace = F)
+test<-
+  BSASoptim(fn = gold,
+            lower = c(-2,-2), upper = c(2,2),
+            seed = 11, n = 100,k=2,
+            trace = F)
+
+test$par
+test$value
+summary(test$df)
 ```
 
+
+###Shiny interface
+In 0.1.0, [shiny](https://shiny.rstudio.com/) interface is added into `rBAS`. Now, the users only need to define
+their objective problems in R code. And the rest of paramsters in `BASoptim` or `BSASoptim` functions can be adjust in the shiny interface. 
+
+
+#### theme united
+For example, `Michalewicz function` can be imported to shiny with `united` theme as follows,
+
+```{r,eval=FALSE}
+run_BAS_App(func = mich, theme = 'united')
+```
+<img src="inst/figures/theme_united_plot.png"/>
+
+####theme flatly
+`flatly` theme:
+
+```{r,eval=FALSE}
+run_BAS_App(func = mich, theme = 'flatly')
+```
+<img src="inst/figures/theme_flatly.png"/>
+
+####theme spacelab
+`spacelab` theme:
+
+```{r,eval=FALSE}
+run_BAS_App(func = mich, theme = 'spacelab')
+```
+<img src="inst/figures/theme_spacelab.png"/>
+The `theme` argument is used to provides Bootstrap themes for shiny. More details can be found in [`shinythemes`](https://github.com/rstudio/shinythemes). Or you can use `help(run_BAS_App)` to check which
+themes you can choose.
 
 ## To do list
 
 - ~~add implement of BSAS algorithm~~
 - add [BAS-WPT(without parameter tuning)](https://arxiv.org/abs/1711.02395)
-- add Shiny graphical interface
+- ~~add Shiny graphical interface~~
 
-You can list your requirement in the [issues](https://github.com/jywang2016/rBAS/issues). Furthermore, if you have a good idea or codes about BAS's mutations, pull requests and discussion are welcome. Contact me by email: jywang_2016@hust.edu.cn
+You can list your requirements in the [issues](https://github.com/jywang2016/rBAS/issues). Furthermore, if you have a good idea or codes about BAS's mutations, pull requests and discussions are welcome. Contact me by email: jywang_2016@hust.edu.cn
 
 ## Author
 `Jiangyu Wang`
@@ -148,3 +203,5 @@ citation(package = 'rBAS')
 ## License
 
 The project is released under the terms of the GPL-3.0.
+
+Copyright © 2018 Jiangyu Wang
