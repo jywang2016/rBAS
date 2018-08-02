@@ -1,8 +1,8 @@
 
-rBAS <img src="inst/figures/rBAS.png" align="right" />
-------------------------------------------------------
+rBAS <img src="man/figures/rBAS.png" align="right" />
+-----------------------------------------------------
 
-An R module aimed at implementation of Beetle Antennae Search (BAS) Algorithm and its mutations, for example, Beetle Swarm Antenae Search (BSAS) Algorithm.
+> An R module aimed at implementation of Beetle Antennae Search (BAS) Algorithm and its mutations, for example, Beetle Swarm Antenae Search (BSAS) Algorithm.
 
 ------------------------------------------------------------------------
 
@@ -64,7 +64,7 @@ Two typocal test functions are applied to validate the efficacy of BAS/BSAS algo
 
 ### Michalewicz function
 
-<img src="inst/figures/Mich.png"/>
+<img src="man/figures/Mich.png"/>
 
 ``` r
 library(rBAS)
@@ -95,7 +95,7 @@ summary(test$df)
 
 ### Goldstein-Price function
 
-<img src="inst/figures/Gold.png"/>
+<img src="man/figures/Gold.png"/>
 
 ``` r
 gold <- function(x){
@@ -175,7 +175,7 @@ For example, `Michalewicz function` can be imported to shiny with `united` theme
 run_BAS_App(func = mich, theme = 'united')
 ```
 
-<img src="inst/figures/theme_united_plot.png"/>
+<img src="man/figures/theme_united_plot.png"/>
 
 #### theme flatly
 
@@ -185,7 +185,7 @@ run_BAS_App(func = mich, theme = 'united')
 run_BAS_App(func = mich, theme = 'flatly')
 ```
 
-<img src="inst/figures/theme_flatly.png"/>
+<img src="man/figures/theme_flatly.png"/>
 
 #### theme spacelab
 
@@ -195,7 +195,7 @@ run_BAS_App(func = mich, theme = 'flatly')
 run_BAS_App(func = mich, theme = 'spacelab')
 ```
 
-<img src="inst/figures/theme_spacelab.png"/> The `theme` argument is used to provides Bootstrap themes for shiny. More details can be found in [`shinythemes`](https://github.com/rstudio/shinythemes). Or you can use `help(run_BAS_App)` to check which themes you can choose.
+<img src="man/figures/theme_spacelab.png"/> The `theme` argument is used to provides Bootstrap themes for shiny. More details can be found in [`shinythemes`](https://github.com/rstudio/shinythemes). Or you can use `help(run_BAS_App)` to check which themes you can choose.
 
 To do list
 ----------

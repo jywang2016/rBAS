@@ -14,7 +14,7 @@
 #' @param d1 initial value of antenae length. You can specify it according to your problem scale
 #' @param eta_d attenuation coefficient of sensing length of antennae
 #' @param l0 position jitter factor constant.Default = 0.
-#' @param l1 initial position jitter factor.Default = 0.\deqn{x = x - step \* dir \* sign(fnleft - fnright) + l \*random(npars)}
+#' @param l1 initial position jitter factor.Default = 0.\deqn{x = x - step * dir * sign(fnleft - fnright) + l \*random(npars)}
 #' @param eta_l attenuation coefficient of jitter factor.\deqn{l^t = \eta_l * l^{t-1} + l_0}
 #' @param step initial step-size of beetle
 #' @param eta_step attenuation coefficient of step-size.\deqn{step^t = \eta_step * step^{t-1}}

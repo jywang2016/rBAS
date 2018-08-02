@@ -1,6 +1,6 @@
 Package: rBAS
 Title: Implementation of the BAS algorithm and its mutation
-Version: 0.1.0
+Version: 0.1.2
 Authors@R: c(person("Jiangyu", "Wang", email = "jywang_2016@hust.edu.cn", role = c("aut","cre")),person("Shuai", "Li", email = "shuaili@polyu.edu.hk", role = c("aut")))
 Description: An implementation of the Beetle Antennae Search algorithm and its mutation version, for example, Beetle Swarm Antennae Search(BSAS) algorithm. You can use this package to solve complex optimization problems.
 Depends: R (>= 3.5.0)

@@ -31,7 +31,7 @@ zero. More specifically, \deqn{d^t = \eta_d * d^{t-1} + d_0}where attenuation co
 
 \item{l0}{position jitter factor constant.Default = 0.}
 
-\item{l1}{initial position jitter factor.Default = 0.\deqn{x = x - step \* dir \* sign(fnleft - fnright) + l \*random(npars)}}
+\item{l1}{initial position jitter factor.Default = 0.\deqn{x = x - step * dir * sign(fnleft - fnright) + l \*random(npars)}}
 
 \item{eta_l}{attenuation coefficient of jitter factor.\deqn{l^t = \eta_l * l^{t-1} + l_0}}
 

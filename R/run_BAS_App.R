@@ -1,7 +1,7 @@
 #' Run shiny interface for BAS/BSAS algorithms
 #'
-#' @description `run_BAS_App` is built based on `shiny`. All you have to do is building your objective function
-#' in R code. Then, you can change the parameters in Shiny interface for BAS algorithm.
+#' @description `run_BAS_App` is built based on `shiny` and `shinythemes`. All you have to do is building your objective function
+#' in R code. Then, you can change the parameters in Shiny interface and run BAS/BSAS algorithm.
 #' @param func objective function; you need build `func` in R code.
 #' @param theme shiny interface themes; `theme` should be one of c("cerulean","cosmo","cyborg","darkly","flatly",
 #' "journal","lumen","paper","readable","sandstone","simplex","slate","spacelab","superhero","united","yeti")
