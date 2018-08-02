@@ -232,7 +232,7 @@ citation(package = 'rBAS')
 #> To cite package 'rBAS' in publications use:
 #> 
 #>   Jiangyu Wang and Shuai Li (2018). rBAS: Implementation of the
-#>   BAS algorithm and its mutation. R package version 0.1.0.
+#>   BAS algorithm and its mutation. R package version 0.1.2.
 #>   https://github.com/jywang2016/rBAS
 #> 
 #> A BibTeX entry for LaTeX users is
@@ -241,7 +241,7 @@ citation(package = 'rBAS')
 #>     title = {rBAS: Implementation of the BAS algorithm and its mutation},
 #>     author = {Jiangyu Wang and Shuai Li},
 #>     year = {2018},
-#>     note = {R package version 0.1.0},
+#>     note = {R package version 0.1.2},
 #>     url = {https://github.com/jywang2016/rBAS},
 #>   }
 ```
