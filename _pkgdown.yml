@@ -1,0 +1,10 @@
+reference:
+  - title: Beetle Antennae Search (BAS) algorithm
+    contents:
+      - BASoptim
+  - title: Beetle Swarm Antennae Search (BSAS) algorithm
+    contents:
+      - BSASoptim
+  - title: Shiny interface
+    contents:
+      - run_BAS_App
