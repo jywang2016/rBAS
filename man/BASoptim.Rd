@@ -5,9 +5,9 @@
 \title{Implementation of the BAS algorithm for optimization problems.}
 \usage{
 BASoptim(fn, init = NULL, lower = c(-6, 0), upper = c(-1, 2),
-  d0 = 0.001, d1 = 3, eta_d = 0.95, l0 = 0, l1 = 0,
-  eta_l = 0.95, step = 0.8, eta_step = 0.95, n = 200,
-  seed = NULL, trace = T, steptol = 0.01)
+  constr = NULL, d0 = 0.001, d1 = 3, eta_d = 0.95, l0 = 0,
+  l1 = 0, eta_l = 0.95, step = 0.8, eta_step = 0.95, n = 200,
+  seed = NULL, trace = T, steptol = 0.01, pen = 1e+05)
 }
 \arguments{
 \item{fn}{objective function; function need to be optimized}
@@ -20,6 +20,9 @@ Michalewicz function of which thelower is c(-6,0); By the way, you should set on
 of your problem.}
 
 \item{upper}{upper of parameters; Default = c(-1,2).}
+
+\item{constr}{constraint function. For example, you can formulate \eqn{x<=10} as
+\eqn{constr = function(x) return(x - 10)}.}
 
 \item{d0}{a constant to gurantee that sensing length of antennae \emph{d} doesn't equal to
 zero. More specifically, \deqn{d^t = \eta_d * d^{t-1} + d_0}where attenuation coefficient
@@ -49,6 +52,8 @@ no matter how many times you repeat your experiments.}
 
 \item{steptol}{default = 0.01; Iteration will stop if step-size in current moment is less than
 steptol.}
+
+\item{pen}{penalty conefficient usually predefined as a large enough value, default 1e5}
 }
 \value{
 A list including best beetle position (parameters) and corresponding objective function value.

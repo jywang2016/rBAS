@@ -10,7 +10,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Implementation of the BAS algorithm and its mutation">
-<meta property="og:description" content="An implementation of the Beetle Antennae Search algorithm and its mutation version, for example, Beetle Swarm Antennae Search(BSAS) algorithm. You can use this package to solve complex optimization problems.">
+<meta property="og:description" content="An implementation of the Beetle Antennae Search algorithm and its mutation version,for example, Beetle Swarm Antennae Search(BSAS) algorithm.You can use this package to solve complex optimization problems.">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -29,7 +29,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">rBAS</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.2</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.5</span>
       </span>
     </div>
 
@@ -78,32 +78,25 @@
 <ul>
 <li><a href="#installation">Installation</a></li>
 <li>
-<a href="#algorithm">Algorithm &amp; References</a>
+<a href="#examples">Examples</a>
+<ul>
+<li><a href="#michalewicz-function">Michalewicz function</a></li>
+<li><a href="#goldstein-price-function">Goldstein-Price function</a></li>
+<li><a href="#bsas-algorithm">Implementation of BSAS</a></li>
+<li><a href="#shiny-interface">Shiny interface</a></li>
+</ul>
+</li>
+<li><a href="#to-do-list">To do list</a></li>
+<li><a href="#authors">Author</a></li>
+<li><a href="#citation">Citation</a></li>
+<li>
+<a href="#references">References</a>
 <ul>
 <li><a href="#bas">BAS</a></li>
 <li><a href="#bsas">BSAS</a></li>
 <li><a href="#bas-wpt">BAS-WPT</a></li>
 </ul>
 </li>
-<li>
-<a href="#examples">Examples</a>
-<ul>
-<li><a href="#michalewicz-function">Michalewicz function</a></li>
-<li><a href="#goldstein-price-function">Goldstein-Price function</a></li>
-<li><a href="#bsas-algorithm">Implementation of BSAS</a></li>
-<li>
-<a href="#shiny-interface">Shiny interface</a>
-<ul>
-<li><a href="#theme-united">Theme: united</a></li>
-<li><a href="#theme-flatly">Theme: flatly</a></li>
-<li><a href="#theme-spacelab">Theme: spacelab</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#to-do-list">To do list</a></li>
-<li><a href="#author">Author</a></li>
-<li><a href="#citation">Citation</a></li>
 <li><a href="#license">License</a></li>
 </ul>
 </div>
@@ -112,25 +105,6 @@
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p><code>rBAS</code> is currently not on CRAN. You can install <code>rBAS</code> from Github with:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"jywang2016/rBAS"</span>)</code></pre></div>
-</div>
-<div id="algorithm" class="section level2">
-<h2 class="hasAnchor">
-<a href="#algorithm" class="anchor"></a>Algorithm</h2>
-<div id="bas" class="section level3">
-<h3 class="hasAnchor">
-<a href="#bas" class="anchor"></a>BAS</h3>
-<p><a href="https://arxiv.org/abs/1710.10724">X. Y. Jiang, and S. Li, “BAS: beetle antennae search algorithm for optimization problems,” arXiv:1710.10724v1.</a></p>
-</div>
-<div id="bsas" class="section level3">
-<h3 class="hasAnchor">
-<a href="#bsas" class="anchor"></a>BSAS</h3>
-<p><a href="https://arxiv.org/abs/1807.10470">J. Y. Wang, and H. X. Chen, “BSAS: Beetle Swarm Antennae Search Algorithm for Optimization Problems,” arXiv:1807.10470v1.</a> If you want to find materials in Chinese about BSAS, please click <a href="https://github.com/jywang2016/BAS/blob/master/BAS_Swarm_documentation.html">here</a>.</p>
-</div>
-<div id="bas-wpt" class="section level3">
-<h3 class="hasAnchor">
-<a href="#bas-wpt" class="anchor"></a>BAS-WPT</h3>
-<p><a href="https://arxiv.org/abs/1711.02395">X. Y. Jiang, and S. Li, “Beetle Antennae Search without Parameter Tuning (BAS-WPT) for Multi-objective Optimization,” arXiv:1711.02395v1.</a></p>
-</div>
 </div>
 <div id="examples" class="section level2">
 <h2 class="hasAnchor">
@@ -157,9 +131,9 @@ mich &lt;-<span class="st"> </span><span class="cf">function</span>(x){
            <span class="dt">seed =</span> <span class="dv">1</span>, <span class="dt">n =</span> <span class="dv">100</span>,<span class="dt">trace =</span> F)
 
 test<span class="op">$</span>par
-<span class="co">#&gt; [1] -4.970852  1.571799</span>
+<span class="co">#&gt; [1] -4.964687  1.575415</span>
 test<span class="op">$</span>value
-<span class="co">#&gt; [1] -1.965519</span>
+<span class="co">#&gt; [1] -1.966817</span>
 <span class="kw">summary</span>(test<span class="op">$</span>df)
 <span class="co">#&gt;       Length Class  Mode   </span>
 <span class="co">#&gt; x     174    -none- numeric</span>
@@ -184,9 +158,9 @@ test<span class="op">$</span>value
            <span class="dt">seed =</span> <span class="ot">NULL</span>, <span class="dt">n =</span> <span class="dv">100</span>,<span class="dt">trace =</span> F)
 
 test<span class="op">$</span>par
-<span class="co">#&gt; [1] -0.002662872 -1.001157030</span>
+<span class="co">#&gt; [1]  0.001870855 -0.996496153</span>
 test<span class="op">$</span>value
-<span class="co">#&gt; [1] 3.001703</span>
+<span class="co">#&gt; [1] 3.004756</span>
 <span class="kw">summary</span>(test<span class="op">$</span>df)
 <span class="co">#&gt;       Length Class  Mode   </span>
 <span class="co">#&gt; x     174    -none- numeric</span>
@@ -205,9 +179,9 @@ test<span class="op">$</span>value
             <span class="dt">trace =</span> F)
 
 test<span class="op">$</span>par
-<span class="co">#&gt; [1] -4.964138  1.558206</span>
+<span class="co">#&gt; [1] -4.968610  1.557598</span>
 test<span class="op">$</span>value
-<span class="co">#&gt; [1] -1.961165</span>
+<span class="co">#&gt; [1] -1.960214</span>
 <span class="kw">summary</span>(test<span class="op">$</span>df)
 <span class="co">#&gt;   Length Class  Mode   </span>
 <span class="co">#&gt; x 202    -none- numeric</span>
@@ -219,9 +193,9 @@ test<span class="op">$</span>value
             <span class="dt">trace =</span> F)
 
 test<span class="op">$</span>par
-<span class="co">#&gt; [1]  0.009854699 -0.997594575</span>
+<span class="co">#&gt; [1]  0.0113079 -0.9948412</span>
 test<span class="op">$</span>value
-<span class="co">#&gt; [1] 3.021811</span>
+<span class="co">#&gt; [1] 3.030877</span>
 <span class="kw">summary</span>(test<span class="op">$</span>df)
 <span class="co">#&gt;   Length Class  Mode   </span>
 <span class="co">#&gt; x 202    -none- numeric</span>
@@ -230,52 +204,69 @@ test<span class="op">$</span>value
 <div id="shiny-interface" class="section level3">
 <h3 class="hasAnchor">
 <a href="#shiny-interface" class="anchor"></a>Shiny interface</h3>
-<p>In 0.1.0, <a href="https://shiny.rstudio.com/">shiny</a> interface is added into <code>rBAS</code>. Now, the users only need to define their objective problems in R code. And the rest of paramsters in <code>BASoptim</code> or <code>BSASoptim</code> functions can be adjust in the shiny interface.</p>
-<div id="theme-united" class="section level4">
-<h4 class="hasAnchor">
-<a href="#theme-united" class="anchor"></a>theme united</h4>
+<p>After <code>rBAS 0.1.0</code>, <a href="https://shiny.rstudio.com/">shiny</a> interface is added into <code>rBAS</code>. Now, the users only need to define their objective problems in R code. And the rest of paramsters in <code>BASoptim</code> or <code>BSASoptim</code> functions can be adjust in the shiny interface.</p>
 <p>For example, <code>Michalewicz function</code> can be imported to shiny with <code>united</code> theme as follows,</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/run_BAS_App.html">run_BAS_App</a></span>(<span class="dt">func =</span> mich, <span class="dt">theme =</span> <span class="st">'united'</span>)</code></pre></div>
 <p><img src="reference/figures/theme_united_plot.png"></p>
-</div>
-<div id="theme-flatly" class="section level4">
-<h4 class="hasAnchor">
-<a href="#theme-flatly" class="anchor"></a>theme flatly</h4>
-<p><code>flatly</code> theme:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/run_BAS_App.html">run_BAS_App</a></span>(<span class="dt">func =</span> mich, <span class="dt">theme =</span> <span class="st">'flatly'</span>)</code></pre></div>
-<p><img src="reference/figures/theme_flatly.png"></p>
-</div>
-<div id="theme-spacelab" class="section level4">
-<h4 class="hasAnchor">
-<a href="#theme-spacelab" class="anchor"></a>theme spacelab</h4>
-<p><code>spacelab</code> theme:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/run_BAS_App.html">run_BAS_App</a></span>(<span class="dt">func =</span> mich, <span class="dt">theme =</span> <span class="st">'spacelab'</span>)</code></pre></div>
-<p><img src="reference/figures/theme_spacelab.png"> The <code>theme</code> argument is used to provides Bootstrap themes for shiny. More details can be found in <a href="https://github.com/rstudio/shinythemes"><code>shinythemes</code></a>. Or you can use <code>help(run_BAS_App)</code> to check which themes you can choose.</p>
-</div>
+<p>The <code>theme</code> argument is used to provides Bootstrap themes for shiny. More details can be found in <a href="https://github.com/rstudio/shinythemes"><code>shinythemes</code></a>. Or you can use <code>help(run_BAS_App)</code> to check which themes you can choose.</p>
 </div>
 </div>
 <div id="to-do-list" class="section level2">
 <h2 class="hasAnchor">
 <a href="#to-do-list" class="anchor"></a>To do list</h2>
+<p>Algorithm:</p>
 <ul>
 <li><del>add implement of BSAS algorithm</del></li>
-<li>add <a href="https://arxiv.org/abs/1711.02395">BAS-WPT(without parameter tuning)</a>
+<li><del>add BAS-WPT(without parameter tuning)(Xiangyuan Jiang)</del></li>
+<li>add binary BAS algorithm (Yue Yaun)</li>
+<li>add second-order BAS algorithm (Xiaoxiao Li)</li>
+<li>add BSO(Beetle Swarm Optimizaiton) (Tiantian Wang)</li>
+<li>…</li>
+</ul>
+<p>Application:</p>
+<ul>
+<li>constrained optimization:
+<ul>
+<li>multi-bar mechanism optimization</li>
+<li>system identification for building (resistance-capacity model)</li>
+<li>assembly path planning</li>
+<li>lot-sizing problems(binary BAS)</li>
+</ul>
 </li>
-<li><del>add Shiny graphical interface</del></li>
+<li>tests
+<ul>
+<li>tests for more than 20 benchmark functions</li>
+</ul>
+</li>
+</ul>
+<p>UI interface:</p>
+<ul>
+<li>basic interface
+<ul>
+<li><del>add basic <a href="https://github.com/rstudio/shiny">shiny</a> graphical interface</del></li>
+<li><del>upload constraints.txt</del></li>
+</ul>
+</li>
+<li>automatic report generation
+<ul>
+<li>report generation based on <a href="https://github.com/rstudio/rmarkdown">rmarkdown</a>
+</li>
+<li>report download</li>
+</ul>
+</li>
 </ul>
 <p>You can list your requirements in the <a href="https://github.com/jywang2016/rBAS/issues">issues</a>. Furthermore, if you have a good idea or codes about BAS’s mutations, pull requests and discussions are welcome. Contact me by email: <a href="mailto:jywang_2016@hust.edu.cn">jywang_2016@hust.edu.cn</a></p>
 </div>
-<div id="author" class="section level2">
+<div id="authors" class="section level2">
 <h2 class="hasAnchor">
-<a href="#author" class="anchor"></a>Author</h2>
+<a href="#authors" class="anchor"></a>Authors</h2>
 <p><code>Jiangyu Wang</code></p>
 <p><a href="https://github.com/jywang2016">github page</a></p>
 <p><em>School of Energy and Power Engineering, Huazhong University of Science and Technology</em></p>
 <p><code>Shuai Li</code></p>
-<ul>
-<li><p><a href="http://www4.comp.polyu.edu.hk/~cssli/">personal homepage</a></p></li>
-<li><p><a href="http://scholar.google.com/citations?hl=zh-CN&amp;user=H8UOWqoAAAAJ">Googlescholar</a></p></li>
-</ul>
+<p><a href="http://www4.comp.polyu.edu.hk/~cssli/">personal homepage</a> &amp; <a href="http://scholar.google.com/citations?hl=zh-CN&amp;user=H8UOWqoAAAAJ">Googlescholar</a></p>
+<p><em>Department of Computing, The Hong Kong Polytechnic University</em></p>
+<p><code>Xiangyuan Jiang</code></p>
 <p><em>Department of Computing, The Hong Kong Polytechnic University</em></p>
 </div>
 <div id="citation" class="section level2">
@@ -285,19 +276,38 @@ test<span class="op">$</span>value
 <span class="co">#&gt; </span>
 <span class="co">#&gt; To cite package 'rBAS' in publications use:</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;   Jiangyu Wang and Shuai Li (2018). rBAS: Implementation of the</span>
-<span class="co">#&gt;   BAS algorithm and its mutation. R package version 0.1.2.</span>
-<span class="co">#&gt;   https://github.com/jywang2016/rBAS</span>
+<span class="co">#&gt;   Jiangyu Wang, Shuai Li and Xiangyuan Jiang (2018). rBAS:</span>
+<span class="co">#&gt;   Implementation of the BAS algorithm and its mutation. R package</span>
+<span class="co">#&gt;   version 0.1.5. https://github.com/jywang2016/rBAS</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; A BibTeX entry for LaTeX users is</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;   @Manual{,</span>
 <span class="co">#&gt;     title = {rBAS: Implementation of the BAS algorithm and its mutation},</span>
-<span class="co">#&gt;     author = {Jiangyu Wang and Shuai Li},</span>
+<span class="co">#&gt;     author = {Jiangyu Wang and Shuai Li and Xiangyuan Jiang},</span>
 <span class="co">#&gt;     year = {2018},</span>
-<span class="co">#&gt;     note = {R package version 0.1.2},</span>
+<span class="co">#&gt;     note = {R package version 0.1.5},</span>
 <span class="co">#&gt;     url = {https://github.com/jywang2016/rBAS},</span>
 <span class="co">#&gt;   }</span></code></pre></div>
+</div>
+<div id="references" class="section level2">
+<h2 class="hasAnchor">
+<a href="#references" class="anchor"></a>References</h2>
+<div id="bas" class="section level3">
+<h3 class="hasAnchor">
+<a href="#bas" class="anchor"></a>BAS</h3>
+<p><a href="https://arxiv.org/abs/1710.10724">X. Y. Jiang, and S. Li, “BAS: beetle antennae search algorithm for optimization problems,” arXiv:1710.10724v1.</a></p>
+</div>
+<div id="bsas" class="section level3">
+<h3 class="hasAnchor">
+<a href="#bsas" class="anchor"></a>BSAS</h3>
+<p><a href="https://arxiv.org/abs/1807.10470">J. Y. Wang, and H. X. Chen, “BSAS: Beetle Swarm Antennae Search Algorithm for Optimization Problems,” arXiv:1807.10470v1.</a> If you want to find materials in Chinese about BSAS, please click <a href="https://github.com/jywang2016/BAS/blob/master/BAS_Swarm_documentation.html">here</a>.</p>
+</div>
+<div id="bas-wpt" class="section level3">
+<h3 class="hasAnchor">
+<a href="#bas-wpt" class="anchor"></a>BAS-WPT</h3>
+<p><a href="https://arxiv.org/abs/1711.02395">X. Y. Jiang, and S. Li, “Beetle Antennae Search without Parameter Tuning (BAS-WPT) for Multi-objective Optimization,” arXiv:1711.02395v1.</a></p>
+</div>
 </div>
 <div id="license" class="section level2">
 <h2 class="hasAnchor">
@@ -328,6 +338,7 @@ test<span class="op">$</span>value
 <ul class="list-unstyled">
 <li>Jiangyu Wang <br><small class="roles"> Author, maintainer </small>  </li>
 <li>Shuai Li <br><small class="roles"> Author </small>  </li>
+<li>Xiangyuan Jiang <br><small class="roles"> Author </small>  </li>
 </ul>
 </div>
 
@@ -337,7 +348,7 @@ test<span class="op">$</span>value
 
 
       <footer><div class="copyright">
-  <p>Developed by Jiangyu Wang, Shuai Li.</p>
+  <p>Developed by Jiangyu Wang, Shuai Li, Xiangyuan Jiang.</p>
 </div>
 
 <div class="pkgdown">

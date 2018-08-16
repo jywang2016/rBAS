@@ -5,10 +5,10 @@
 \title{Implementation of the Beetle Swarm Antennae Search (BSAS) algorithm for optimization problems.}
 \usage{
 BSASoptim(fn, init = NULL, lower = c(-6, 0), upper = c(-1, 2),
-  k = 5, d0 = 0.001, d1 = 3, eta_d = 0.95, l0 = 0, l1 = 0,
-  eta_l = 0.95, step = 0.8, eta_step = 0.95, n = 200,
-  seed = NULL, trace = T, steptol = 0.01, p_min = 0.2,
-  p_step = 0.2, n_flag = 2)
+  k = 5, constr = NULL, d0 = 0.001, d1 = 3, eta_d = 0.95,
+  l0 = 0, l1 = 0, eta_l = 0.95, step = 0.8, eta_step = 0.95,
+  n = 200, seed = NULL, trace = T, steptol = 0.01, p_min = 0.2,
+  p_step = 0.2, n_flag = 2, pen = 1e+05)
 }
 \arguments{
 \item{fn}{objective function; function need to be optimized}
@@ -23,6 +23,9 @@ of your problem.}
 \item{upper}{upper of parameters; Default = c(-1,2).}
 
 \item{k}{a positive integer.\emph{k} is the number of beetles for exploring in every iteration.}
+
+\item{constr}{constraint function. For example, you can formulate \eqn{x<=10} as
+\eqn{constr = function(x) return(x - 10)}.}
 
 \item{d0}{a constant to gurantee that sensing length of antennae \emph{d} doesn't equal to
 zero. More specifically, \deqn{d^t = \eta_d * d^{t-1} + d_0}where attenuation coefficient
@@ -67,6 +70,8 @@ slightly large.}
 \item{n_flag}{an positive integer; default = 2; If step-size doesn't update for successive n_flag times because p_step is
 larger than random generated value, the step-size will be forced updating. If you set a large p_step, set a small n_flag
 is suggested.}
+
+\item{pen}{penalty conefficient usually predefined as a large enough value, default 1e5}
 }
 \value{
 A list including best beetle position (parameters) and corresponding objective function value.
@@ -76,16 +81,98 @@ You could find more information about BSAS in \url{https://arxiv.org/abs/1807.10
 }
 \examples{
 #======== examples start =======================
-# BSAS application on Michalewicz function
+# >>>>>> example without constraint: Michalewicz function <<<<<<
 library(rBAS)
 mich <- function(x){
    y1 <- -sin(x[1])*(sin((x[1]^2)/pi))^20
    y2 <- -sin(x[2])*(sin((2*x[2]^2)/pi))^20
    return(y1+y2)
 }
-BSASoptim(fn = mich,
-          lower = c(-6,0), upper = c(-1,2),
-          seed = 12, n = 100,k=5)
+result <- BSASoptim(fn = mich,
+                    lower = c(-6,0), upper = c(-1,2),
+                    seed = 1, n = 100,k=5,step = 0.6,
+                    trace = FALSE)
+result$par
+result$value
+
+# >>>> example with constraint: Mixed integer nonlinear programming <<<<
+pressure_Vessel <- list(
+  obj = function(x){
+    x1 <- floor(x[1])*0.0625
+    x2 <- floor(x[2])*0.0625
+    x3 <- x[3]
+    x4 <- x[4]
+    result <- 0.6224*x1*x3*x4 + 1.7781*x2*x3^2 +3.1611*x1^2*x4 + 19.84*x1^2*x3
+  },
+  con = function(x){
+    x1 <- floor(x[1])*0.0625
+    x2 <- floor(x[2])*0.0625
+    x3 <- x[3]
+    x4 <- x[4]
+    c(
+      0.0193*x3 - x1,
+      0.00954*x3 - x2,
+      750.0*1728.0 - pi*x3^2*x4 - 4/3*pi*x3^3
+    )
+  }
+)
+result <- BSASoptim(fn = pressure_Vessel$obj,
+                    k = 5,
+                    lower =c( 1, 1, 10, 10),
+                    upper = c(100, 100, 200, 200),
+                    constr = pressure_Vessel$con,
+                    n = 200,
+                    step = 100,
+                    d1 = 5,
+                    pen = 1e6,
+                    steptol = 1e-6,
+                    n_flag = 2,
+                    seed = 2,trace = FALSE)
+
+result$par
+result$value
+
+# >>>> example with constraint: Himmelblau function <<<<
+himmelblau <- list(
+  obj = function(x){
+    x1 <- x[1]
+    x3 <- x[3]
+    x5 <- x[5]
+    result <- 5.3578547*x3^2 + 0.8356891*x1*x5 + 37.29329*x[1] - 40792.141
+  },
+  con = function(x){
+    x1 <- x[1]
+    x2 <- x[2]
+    x3 <- x[3]
+    x4 <- x[4]
+    x5 <- x[5]
+    g1 <- 85.334407 + 0.0056858*x2*x5 + 0.00026*x1*x4 - 0.0022053*x3*x5
+    g2 <- 80.51249 + 0.0071317*x2*x5 + 0.0029955*x1*x2 + 0.0021813*x3^2
+    g3 <- 9.300961 + 0.0047026*x3*x5 + 0.0012547*x1*x3 + 0.0019085*x3*x4
+    c(
+      -g1,
+      g1-92,
+      90-g2,
+      g2 - 110,
+      20 - g3,
+      g3 - 25
+    )
+  }
+)
+result <- BSASoptim(fn = himmelblau$obj,
+                    k = 5,
+                    lower =c(78,33,27,27,27),
+                    upper = c(102,45,45,45,45),
+                    constr = himmelblau$con,
+                    n = 200,
+                    step = 100,
+                    d1 = 10,
+                    pen = 1e6,
+                    steptol = 1e-6,
+                    n_flag = 2,
+                    seed = 11,trace = FALSE)
+result$par # 78.01565 33.00000 27.07409 45.00000 44.95878
+result$value # -31024.17
 #======== examples end =======================
 }
 \references{

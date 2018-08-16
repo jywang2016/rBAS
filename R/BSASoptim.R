@@ -38,37 +38,129 @@
 #' larger than random generated value, the step-size will be forced updating. If you set a large p_step, set a small n_flag
 #' is suggested.
 #' @param k a positive integer.\emph{k} is the number of beetles for exploring in every iteration.
+#' @param pen penalty conefficient usually predefined as a large enough value, default 1e5
+#' @param constr constraint function. For example, you can formulate \eqn{x<=10} as
+#' \eqn{constr = function(x) return(x - 10)}.
 #' @return A list including best beetle position (parameters) and corresponding objective function value.
 #' @references X. Y. Jiang, and S. Li, BAS: beetle antennae search algorithm for
 #' optimization problems, arXiv:1710.10724v1.
 #' @importFrom stats runif
 #' @examples
 #' #======== examples start =======================
-#' # BSAS application on Michalewicz function
+#' # >>>>>> example without constraint: Michalewicz function <<<<<<
 #' library(rBAS)
 #' mich <- function(x){
 #'    y1 <- -sin(x[1])*(sin((x[1]^2)/pi))^20
 #'    y2 <- -sin(x[2])*(sin((2*x[2]^2)/pi))^20
 #'    return(y1+y2)
 #' }
-#' BSASoptim(fn = mich,
-#'           lower = c(-6,0), upper = c(-1,2),
-#'           seed = 12, n = 100,k=5)
+#' result <- BSASoptim(fn = mich,
+#'                     lower = c(-6,0), upper = c(-1,2),
+#'                     seed = 1, n = 100,k=5,step = 0.6,
+#'                     trace = FALSE)
+#' result$par
+#' result$value
+#'
+#' # >>>> example with constraint: Mixed integer nonlinear programming <<<<
+#' pressure_Vessel <- list(
+#'   obj = function(x){
+#'     x1 <- floor(x[1])*0.0625
+#'     x2 <- floor(x[2])*0.0625
+#'     x3 <- x[3]
+#'     x4 <- x[4]
+#'     result <- 0.6224*x1*x3*x4 + 1.7781*x2*x3^2 +3.1611*x1^2*x4 + 19.84*x1^2*x3
+#'   },
+#'   con = function(x){
+#'     x1 <- floor(x[1])*0.0625
+#'     x2 <- floor(x[2])*0.0625
+#'     x3 <- x[3]
+#'     x4 <- x[4]
+#'     c(
+#'       0.0193*x3 - x1,
+#'       0.00954*x3 - x2,
+#'       750.0*1728.0 - pi*x3^2*x4 - 4/3*pi*x3^3
+#'     )
+#'   }
+#' )
+#' result <- BSASoptim(fn = pressure_Vessel$obj,
+#'                     k = 5,
+#'                     lower =c( 1, 1, 10, 10),
+#'                     upper = c(100, 100, 200, 200),
+#'                     constr = pressure_Vessel$con,
+#'                     n = 200,
+#'                     step = 100,
+#'                     d1 = 5,
+#'                     pen = 1e6,
+#'                     steptol = 1e-6,
+#'                     n_flag = 2,
+#'                     seed = 2,trace = FALSE)
+#'
+#' result$par
+#' result$value
+#'
+#' # >>>> example with constraint: Himmelblau function <<<<
+#' himmelblau <- list(
+#'   obj = function(x){
+#'     x1 <- x[1]
+#'     x3 <- x[3]
+#'     x5 <- x[5]
+#'     result <- 5.3578547*x3^2 + 0.8356891*x1*x5 + 37.29329*x[1] - 40792.141
+#'   },
+#'   con = function(x){
+#'     x1 <- x[1]
+#'     x2 <- x[2]
+#'     x3 <- x[3]
+#'     x4 <- x[4]
+#'     x5 <- x[5]
+#'     g1 <- 85.334407 + 0.0056858*x2*x5 + 0.00026*x1*x4 - 0.0022053*x3*x5
+#'     g2 <- 80.51249 + 0.0071317*x2*x5 + 0.0029955*x1*x2 + 0.0021813*x3^2
+#'     g3 <- 9.300961 + 0.0047026*x3*x5 + 0.0012547*x1*x3 + 0.0019085*x3*x4
+#'     c(
+#'       -g1,
+#'       g1-92,
+#'       90-g2,
+#'       g2 - 110,
+#'       20 - g3,
+#'       g3 - 25
+#'     )
+#'   }
+#' )
+#' result <- BSASoptim(fn = himmelblau$obj,
+#'                     k = 5,
+#'                     lower =c(78,33,27,27,27),
+#'                     upper = c(102,45,45,45,45),
+#'                     constr = himmelblau$con,
+#'                     n = 200,
+#'                     step = 100,
+#'                     d1 = 10,
+#'                     pen = 1e6,
+#'                     steptol = 1e-6,
+#'                     n_flag = 2,
+#'                     seed = 11,trace = FALSE)
+#' result$par # 78.01565 33.00000 27.07409 45.00000 44.95878
+#' result$value # -31024.17
 #' #======== examples end =======================
 #' @export
 BSASoptim <- function(fn,init = NULL,
                       lower = c(-6,0),upper = c(-1,2),
                       k = 5,
+                      constr = NULL,
                       d0 = 0.001, d1 = 3, eta_d = 0.95,
+                      #c2 = 5,
                       l0 = 0, l1 = 0.0, eta_l = 0.95,
                       step = 0.8, eta_step = 0.95,
                       n = 200,seed = NULL,trace = T,steptol = 0.01,
-                      p_min = 0.2, p_step = 0.2,n_flag = 2){
-
+                      p_min = 0.2, p_step = 0.2,n_flag = 2,
+                      pen = 1e5){
+  ustep<- function(x){
+    result <- sapply(x,function(x) ifelse(x > 0,1,0))
+    return(result)
+  }
   if(!is.null(seed)){
     set.seed(seed)
   }
   d <- d1
+  #d <- step/c2
   l <- l1
   npar <- length(lower)
   if(is.null(init)){
@@ -82,9 +174,9 @@ BSASoptim <- function(fn,init = NULL,
 
   len <- length(x0)
   parname <- names(x0)
+
   handle.bounds <- function(u){
-    dotdir <- matrix(rep(sign(fleft - fright),len),nrow = len,byrow = T)
-    temp <- u - step * dir * dotdir + w
+    temp <- u
     bad <- temp > upper
     if(any(bad)){
       temp[bad] <- upper[bad]
@@ -95,39 +187,20 @@ BSASoptim <- function(fn,init = NULL,
     }
     return(temp)
   }
-  handle.bounds.LR <- function(x,act_dir = 'left'){
 
-    if(act_dir == 'left'){
-      temp <- x + dir * d
-      bad <- temp > upper
-      if(any(bad)){
-        temp[bad] <- upper[bad]
-      }
-      bad <- temp < lower
-      if(any(bad)){
-        temp[bad] <- lower[bad]
-      }
-
-    }else{
-      temp <- x - dir * d
-      bad <- temp > upper
-      if(!is.null(bad)){
-        temp[bad] <- upper[bad]
-      }
-      bad <- temp < lower
-      if(any(bad)){
-        temp[bad] <- lower[bad]
-      }
-    }
-
-    return(temp)
+  # redefine the fn
+  if(is.null(constr)){
+    fnew <- fn
+  }else{
+    fnew <- function(x) fn(x) + pen*sum(ustep(constr(x)))
   }
 
+  #
   fnor <- function(x) x/(1e-16 + sqrt(sum(x^2)))
   # first iteration ---------------------------------
   x <- x0
   xbest <- x0
-  fbest <- fn(xbest)
+  fbest <- fnew(xbest)
   x_store <- x
   f_store <- fbest
 
@@ -153,21 +226,24 @@ BSASoptim <- function(fn,init = NULL,
     dir <- matrix(dir,nrow = k,byrow = T)
     dir <- apply(dir,1,fnor)
 
-    xleft <- handle.bounds.LR(x,act_dir = 'left')
+    xleft <- handle.bounds(x + dir * d)#x + dir * d #
     rownames(xleft) <- parname
-    fleft <- apply(xleft,2,fn)#fn(xleft)
+    fleft <- apply(xleft,2,fnew)
 
-    xright <- handle.bounds.LR(x,act_dir = 'right')
+    xright <- handle.bounds(x - dir * d)#x - dir * d #
     rownames(xright) <- parname
-    fright <- apply(xright,2,fn)#fn(xright)
+    fright <- apply(xright,2,fnew)#fn(xright)
 
     w <- l*runif(min = -1,max = 1, n = npar*k)
     w <- matrix(w,ncol = k)
 
     x_mat <- matrix(rep(x,k),ncol = k,byrow = F)
-    x_temp <- handle.bounds(u = x_mat)
+    dotdir <- matrix(rep(sign(fleft - fright),len),nrow = len,byrow = T)
+    x_mat <- x_mat - step * dir * dotdir + w
+
+    x_temp <- handle.bounds(x_mat)
     rownames(x_temp) <- parname
-    f_temp <-  apply(x_temp,2,fn)
+    f_temp <-  apply(x_temp,2,fnew)
 
     if(trace){
       cat(k,'beetles\'objective value :','[',f_temp,']','\n')
@@ -182,12 +258,17 @@ BSASoptim <- function(fn,init = NULL,
       if(r_temp > p_min){
         index <- which.min(f_temp)
       }else{
-        index <- sample(x = which(f_temp < fbest), size = 1)
+        #when length(x) == 1 sample(x,size) will deal with x as 1:x
+        #therefore, length of index need to be judged
+        index_temp <- which(f_temp < fbest)
+        index <- ifelse(length(index_temp) ==1,
+                        index_temp,
+                        sample(index_temp,size = 1))
       }
 
       x <- x_temp[,index]
       xbest <- x
-      fbest <- min(f_temp)
+      fbest <- f_temp[index]
       if(trace){
         cat('Position/Params updates','[',xbest,']\nCorresponding Objective value:',fbest,'\n')
       }
@@ -198,11 +279,11 @@ BSASoptim <- function(fn,init = NULL,
         cat('Position & Objective remain the same',fbest,'\nStep-size should reduce\n')
       }
 
-      d <- d * eta_d + d0
-      l <- l * eta_l + l0
       r_temp <- runif(1)
       if(r_temp > p_step | flag_step > n_flag){
         step <- step*eta_step
+        d <- d*eta_d + d0
+        l <- l * eta_l + l0
         flag_step <- 0
       }else{
         step <- step
@@ -212,11 +293,13 @@ BSASoptim <- function(fn,init = NULL,
         cat('Step-size:',step,'\n')
       }
     }
+    #d <- d*eta_d + d0
+    #l <- l * eta_l + l0
     x_store <- c(x_store,x)
     f_store <- c(f_store,fbest)
 
     if(step < steptol){
-      message('----step < steptol----','-----stop the iteration------\n')
+      message('----step < steptol----','-----stop the iteration------')
       break
     }
   }
@@ -230,3 +313,4 @@ BSASoptim <- function(fn,init = NULL,
                            f = f_store))
   return(result)
 }
+

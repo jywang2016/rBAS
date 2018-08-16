@@ -62,7 +62,7 @@ in R code. Then, you can change the parameters in Shiny interface and run BAS/BS
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rBAS</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.2</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.5</span>
       </span>
     </div>
 
@@ -110,14 +110,18 @@ in R code. Then, you can change the parameters in Shiny interface and run BAS/BS
     
     </div>
 
-    <pre class="usage"><span class='fu'>run_BAS_App</span>(<span class='no'>func</span>, <span class='no'>theme</span>)</pre>
+    <pre class="usage"><span class='fu'>run_BAS_App</span>(<span class='no'>func</span>, <span class='kw'>constr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>theme</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>func</th>
-      <td><p>objective function; you need build `func` in R code.</p></td>
+      <td><p>objective function; see example for more informations</p></td>
+    </tr>
+    <tr>
+      <th>constr</th>
+      <td><p>constraints function; see example for more informations</p></td>
     </tr>
     <tr>
       <th>theme</th>
@@ -152,7 +156,7 @@ in R code. Then, you can change the parameters in Shiny interface and run BAS/BS
 
       <footer>
       <div class="copyright">
-  <p>Developed by Jiangyu Wang, Shuai Li.</p>
+  <p>Developed by Jiangyu Wang, Shuai Li, Xiangyuan Jiang.</p>
 </div>
 
 <div class="pkgdown">

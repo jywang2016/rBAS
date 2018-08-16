@@ -1,10 +1,14 @@
 reference:
-  - title: Beetle Antennae Search (BAS) algorithm
+  - title: BAS
+    desc: Beetle Antennae Search (BAS) algorithm
     contents:
       - BASoptim
-  - title: Beetle Swarm Antennae Search (BSAS) algorithm
+  - title: BSAS
+    desc: Beetle Swarm Antennae Search (BSAS) algorithm
     contents:
       - BSASoptim
+      - BSAS_WPT
   - title: Shiny interface
+    desc: Shiny interface for all algorithms included in `rBAS`
     contents:
       - run_BAS_App

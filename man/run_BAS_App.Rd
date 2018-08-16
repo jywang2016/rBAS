@@ -4,10 +4,12 @@
 \alias{run_BAS_App}
 \title{Run shiny interface for BAS/BSAS algorithms}
 \usage{
-run_BAS_App(func, theme)
+run_BAS_App(func, constr = NULL, theme)
 }
 \arguments{
-\item{func}{objective function; you need build `func` in R code.}
+\item{func}{objective function; see example for more informations}
+
+\item{constr}{constraints function; see example for more informations}
 
 \item{theme}{shiny interface themes; `theme` should be one of c("cerulean","cosmo","cyborg","darkly","flatly",
 "journal","lumen","paper","readable","sandstone","simplex","slate","spacelab","superhero","united","yeti")}

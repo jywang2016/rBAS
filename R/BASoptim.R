@@ -25,6 +25,9 @@
 #' @param trace default = T; trace the process of BAS iteration.
 #' @param steptol default = 0.01; Iteration will stop if step-size in current moment is less than
 #' steptol.
+#' @param pen penalty conefficient usually predefined as a large enough value, default 1e5
+#' @param constr constraint function. For example, you can formulate \eqn{x<=10} as
+#' \eqn{constr = function(x) return(x - 10)}.
 #' @references X. Y. Jiang, and S. Li, BAS: beetle antennae search algorithm for
 #' optimization problems, arXiv:1710.10724v1.
 #' @return A list including best beetle position (parameters) and corresponding objective function value.
@@ -44,16 +47,25 @@
 #' @importFrom stats runif
 #' @export
 BASoptim <- function(fn,init = NULL,
-                     lower = c(-6,0),upper = c(-1,2),
-                     d0 = 0.001, d1 = 3, eta_d = 0.95,
-                     l0 = 0, l1 = 0.0, eta_l = 0.95,
-                     step = 0.8, eta_step = 0.95,
-                     n = 200,seed = NULL,trace = T,
-                     steptol = 0.01){
+                    lower = c(-6,0),upper = c(-1,2),
+                    constr = NULL,
+                    d0 = 0.001, d1 = 3, eta_d = 0.95,
+                    #c2 = 5,
+                    l0 = 0, l1 = 0.0, eta_l = 0.95,
+                    step = 0.8, eta_step = 0.95,
+                    n = 200,seed = NULL,trace = T,
+                    steptol = 0.01,pen = 1e5){
+
+  ustep<- function(x){
+    result <- sapply(x,function(x) ifelse(x > 0,1,0))
+    return(result)
+  }
+
   if(!is.null(seed)){
     set.seed(seed)
   }
   d <- d1
+  #d <- step/c2
   l <- l1
   npar <- length(lower)
   if(is.null(init)){
@@ -65,10 +77,16 @@ BASoptim <- function(fn,init = NULL,
   if(!is.null(names(lower))){
     names(x0) <- names(lower)
   }
+  # redefine the fn
+  if(is.null(constr)){
+    fnew <- fn
+  }else{
+    fnew <- function(x) fn(x) + pen*sum(ustep(constr(x)))
+  }
   # first iteration---------------------------------
   x <- x0
   xbest <- x0
-  fbest <- fn(xbest)
+  fbest <- fnew(xbest)
   if(trace){
     cat('Iter: ',0,' xbest: ','[',xbest,'], fbest= ',fbest,'\n')
   }
@@ -79,10 +97,11 @@ BASoptim <- function(fn,init = NULL,
   xb_store <- xbest
 
   handle.bounds <- function(u){
-    temp <- u - step * dir * sign(fleft - fright) + w
+    #temp <- u - step * dir * sign(fleft - fright) + w
+    temp <- u
     bad <- temp > upper
     if(any(bad)){
-      temp[bad] <- upper[bad] + u[bad]
+      temp[bad] <- upper[bad] #+ u[bad]
     }
     bad <- temp < lower
     if(any(bad)){
@@ -91,25 +110,23 @@ BASoptim <- function(fn,init = NULL,
     temp
   }
 
-
   # iteration loop -----------------------------------
   for (i in 1:n){
     #normalized direction
     dir <- runif(min = -1,max = 1, n = npar)
     dir <- dir/(1e-16 + sqrt(sum(dir^2)))
 
-    #left-hand side and right-hand side
-    xleft <- x + dir * d
-    #xleft <- handle.bounds.LR(x,act_dir = 'left')
-    fleft <- fn(xleft)
-    xright <- x - dir*d
-    #xright <- handle.bounds.LR(x,act_dir = 'right')
-    fright <- fn(xright)
+
+    xleft <- handle.bounds(x + dir * d)#x + dir * d
+    fleft <- fnew(xleft)
+
+    xright <- handle.bounds(x - dir*d)#x - dir * d
+    fright <- fnew(xright)
 
     #random work
     w <- l*runif(min = -1,max = 1, n = npar)
-    x <- handle.bounds(u = x)
-    f <- fn(x)
+    x <- handle.bounds(u = x - step * dir * sign(fleft - fright) + w)
+    f <- fnew(x)
 
     # best position updates
     if (f < fbest){
@@ -127,16 +144,17 @@ BASoptim <- function(fn,init = NULL,
       cat('Iter: ',i,' xbest: ','[',xbest,'], fbest= ',fbest,'\n')
     }
 
-    #d update
-    d <- d * eta_d + d0
     #l update
     l <- l * eta_l + l0
     #step update
     step <- step*eta_step
+    #d update
+    #d <- step/c2
+    d <- d*eta_d + d0
 
     if(step < steptol){
       if(trace){
-        message('----step < steptol----','-----stop the iteration------\n')
+        message('----step < steptol----','-----stop the iteration------')
       }
       break
     }
