@@ -209,7 +209,7 @@ test<span class="op">$</span>value
 <a href="#shiny-interface" class="anchor"></a>Shiny interface</h3>
 <p>After <code>rBAS 0.1.0</code>, <a href="https://shiny.rstudio.com/">shiny</a> interface is added into <code>rBAS</code>. Now, the users only need to define their objective problems in R code. And the rest of paramsters in <code>BASoptim</code> or <code>BSASoptim</code> functions can be adjust in the shiny interface.</p>
 <p>For example, <code>Michalewicz function</code> can be imported to shiny with <code>united</code> theme as follows,</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/run_BAS_App.html">run_BAS_App</a></span>(<span class="dt">func =</span> mich, <span class="dt">theme =</span> <span class="st">'united'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/run_BAS_App.html">run_BAS_App</a></span>(<span class="dt">func =</span> mich)</code></pre></div>
 <p><img src="reference/figures/theme_united_plot.png"></p>
 <p>The <code>theme</code> argument is used to provides Bootstrap themes for shiny. More details can be found in <a href="https://github.com/rstudio/shinythemes"><code>shinythemes</code></a>. Or you can use <code>help(run_BAS_App)</code> to check which themes you can choose.</p>
 </div>

@@ -130,7 +130,7 @@ their objective problems in R code. And the rest of paramsters in `BASoptim` or 
 For example, `Michalewicz function` can be imported to shiny with `united` theme as follows,
 
 ```{r,eval=FALSE}
-run_BAS_App(func = mich, theme = 'united')
+run_BAS_App(func = mich)
 ```
 <img src="man/figures/theme_united_plot.png"/>
 

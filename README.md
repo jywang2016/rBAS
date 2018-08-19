@@ -152,7 +152,7 @@ After `rBAS 0.1.0`, [shiny](https://shiny.rstudio.com/) interface is added into 
 For example, `Michalewicz function` can be imported to shiny with `united` theme as follows,
 
 ``` r
-run_BAS_App(func = mich, theme = 'united')
+run_BAS_App(func = mich)
 ```
 
 <img src="man/figures/theme_united_plot.png"/>

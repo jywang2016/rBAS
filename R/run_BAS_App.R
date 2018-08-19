@@ -4,8 +4,9 @@
 #' in R code. Then, you can change the parameters in Shiny interface and run BAS/BSAS algorithm.
 #' @param func objective function; see example for more informations
 #' @param constr constraints function; see example for more informations
-#' @param theme shiny interface themes; `theme` should be one of c("cerulean","cosmo","cyborg","darkly","flatly",
+#' @param theme shiny interface themes, default `united`; `theme` should be one of c("cerulean","cosmo","cyborg","darkly","flatly",
 #' "journal","lumen","paper","readable","sandstone","simplex","slate","spacelab","superhero","united","yeti")
+#' see \code{\link[shinythemes]{shinytheme}} for more information.
 #' @import shiny
 #' @import shinythemes
 #' @import ggplot2
@@ -19,15 +20,15 @@
 #'    y2 <- -sin(x[2])*(sin((2*x[2]^2)/pi))^20
 #'    return(y1+y2)
 #' }
-#' #run_BAS_App(func = mich, theme = 'united')
+#' #run_BAS_App(func = mich)
 #' #======== examples end =======================
 #' @export
-run_BAS_App <- function(func,constr = NULL, theme = NULL){
+run_BAS_App <- function(func,constr = NULL, theme = 'united'){
   shinyApp(
     ui = tagList(
       #shinythemes::themeSelector(),
       navbarPage(
-        theme = ifelse(is.null(theme),shinytheme('united'),shinytheme(theme)),
+        theme = shinytheme(theme),
         title = "Shiny interface for BAS algorithms",
         tabPanel("BAS",
                  sidebarPanel(
