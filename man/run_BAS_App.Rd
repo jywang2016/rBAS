@@ -4,7 +4,7 @@
 \alias{run_BAS_App}
 \title{Run shiny interface for BAS/BSAS algorithms}
 \usage{
-run_BAS_App(func, constr = NULL, theme)
+run_BAS_App(func, constr = NULL, theme = NULL)
 }
 \arguments{
 \item{func}{objective function; see example for more informations}

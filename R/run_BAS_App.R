@@ -22,12 +22,12 @@
 #' #run_BAS_App(func = mich, theme = 'united')
 #' #======== examples end =======================
 #' @export
-run_BAS_App <- function(func,constr = NULL, theme){
+run_BAS_App <- function(func,constr = NULL, theme = NULL){
   shinyApp(
     ui = tagList(
       #shinythemes::themeSelector(),
       navbarPage(
-        theme = shinytheme(theme),
+        theme = ifelse(is.null(theme),shinytheme('united'),shinytheme(theme)),
         title = "Shiny interface for BAS algorithms",
         tabPanel("BAS",
                  sidebarPanel(
