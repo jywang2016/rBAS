@@ -29,7 +29,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">rBAS</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.5</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.6</span>
       </span>
     </div>
 
@@ -85,7 +85,9 @@
 <ul>
 <li><a href="#michalewicz-function">Michalewicz function</a></li>
 <li><a href="#goldstein-price-function">Goldstein-Price function</a></li>
+<li><a href="#pressure-vessel">Mixed integer nonlinear programming</a></li>
 <li><a href="#bsas-algorithm">Implementation of BSAS</a></li>
+<li><a href="#more-algorithms">More algorithms BAS/BSAS-WPT/BSO</a></li>
 <li><a href="#shiny-interface">Shiny interface</a></li>
 </ul>
 </li>
@@ -98,6 +100,7 @@
 <li><a href="#bas">BAS</a></li>
 <li><a href="#bsas">BSAS</a></li>
 <li><a href="#bas-wpt">BAS-WPT</a></li>
+<li><a href="#bso">BSO</a></li>
 </ul>
 </li>
 <li><a href="#license">License</a></li>
@@ -171,6 +174,47 @@ test<span class="op">$</span>value
 <span class="co">#&gt; xbest 174    -none- numeric</span>
 <span class="co">#&gt; fbest  87    -none- numeric</span></code></pre></div>
 </div>
+<div id="pressure-vessel" class="section level3">
+<h3 class="hasAnchor">
+<a href="#pressure-vessel" class="anchor"></a>Pressure Vessel</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pressure_Vessel &lt;-<span class="st"> </span><span class="kw">list</span>(
+  <span class="dt">obj =</span> <span class="cf">function</span>(x){
+    x1 &lt;-<span class="st"> </span><span class="kw">floor</span>(x[<span class="dv">1</span>])<span class="op">*</span><span class="fl">0.0625</span>
+    x2 &lt;-<span class="st"> </span><span class="kw">floor</span>(x[<span class="dv">2</span>])<span class="op">*</span><span class="fl">0.0625</span>
+    x3 &lt;-<span class="st"> </span>x[<span class="dv">3</span>]
+    x4 &lt;-<span class="st"> </span>x[<span class="dv">4</span>]
+    result &lt;-<span class="st"> </span><span class="fl">0.6224</span><span class="op">*</span>x1<span class="op">*</span>x3<span class="op">*</span>x4 <span class="op">+</span><span class="st"> </span><span class="fl">1.7781</span><span class="op">*</span>x2<span class="op">*</span>x3<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="fl">3.1611</span><span class="op">*</span>x1<span class="op">^</span><span class="dv">2</span><span class="op">*</span>x4 <span class="op">+</span><span class="st"> </span><span class="fl">19.84</span><span class="op">*</span>x1<span class="op">^</span><span class="dv">2</span><span class="op">*</span>x3
+  },
+  <span class="dt">con =</span> <span class="cf">function</span>(x){
+    x1 &lt;-<span class="st"> </span><span class="kw">floor</span>(x[<span class="dv">1</span>])<span class="op">*</span><span class="fl">0.0625</span>
+    x2 &lt;-<span class="st"> </span><span class="kw">floor</span>(x[<span class="dv">2</span>])<span class="op">*</span><span class="fl">0.0625</span>
+    x3 &lt;-<span class="st"> </span>x[<span class="dv">3</span>]
+    x4 &lt;-<span class="st"> </span>x[<span class="dv">4</span>]
+    <span class="kw">c</span>(
+      <span class="fl">0.0193</span><span class="op">*</span>x3 <span class="op">-</span><span class="st"> </span>x1,
+      <span class="fl">0.00954</span><span class="op">*</span>x3 <span class="op">-</span><span class="st"> </span>x2,
+      <span class="fl">750.0</span><span class="op">*</span><span class="fl">1728.0</span> <span class="op">-</span><span class="st"> </span>pi<span class="op">*</span>x3<span class="op">^</span><span class="dv">2</span><span class="op">*</span>x4 <span class="op">-</span><span class="st"> </span><span class="dv">4</span><span class="op">/</span><span class="dv">3</span><span class="op">*</span>pi<span class="op">*</span>x3<span class="op">^</span><span class="dv">3</span>
+    )
+  }
+)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">result &lt;-<span class="st"> </span><span class="kw"><a href="reference/BSASoptim.html">BSASoptim</a></span>(<span class="dt">fn =</span> pressure_Vessel<span class="op">$</span>obj,
+                    <span class="dt">k =</span> <span class="dv">10</span>,
+                    <span class="dt">lower =</span><span class="kw">c</span>( <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">10</span>),
+                    <span class="dt">upper =</span> <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">200</span>),
+                    <span class="dt">constr =</span> pressure_Vessel<span class="op">$</span>con,
+                    <span class="dt">n =</span> <span class="dv">200</span>,
+                    <span class="dt">step =</span> <span class="dv">100</span>,
+                    <span class="dt">d1 =</span> <span class="dv">4</span>,
+                    <span class="dt">pen =</span> <span class="fl">1e6</span>,
+                    <span class="dt">steptol =</span> <span class="fl">1e-6</span>,
+                    <span class="dt">n_flag =</span> <span class="dv">2</span>,
+                    <span class="dt">seed =</span> <span class="dv">2</span>,<span class="dt">trace =</span> <span class="ot">FALSE</span>)
+
+result<span class="op">$</span>par
+<span class="co">#&gt; [1]  14.077163   7.087842  45.335198 140.284669</span>
+result<span class="op">$</span>value
+<span class="co">#&gt; [1] 6090.567</span></code></pre></div>
+</div>
 <div id="bsas-algorithm" class="section level3">
 <h3 class="hasAnchor">
 <a href="#bsas-algorithm" class="anchor"></a>BSAS algorithm</h3>
@@ -203,6 +247,11 @@ test<span class="op">$</span>value
 <span class="co">#&gt;   Length Class  Mode   </span>
 <span class="co">#&gt; x 202    -none- numeric</span>
 <span class="co">#&gt; f 101    -none- numeric</span></code></pre></div>
+</div>
+<div id="more-algorithms" class="section level3">
+<h3 class="hasAnchor">
+<a href="#more-algorithms" class="anchor"></a>More algorithms</h3>
+<p>If you want find more algorithm which is avaliable in <code>rBAS</code>.You can visit the <a href="https://jywang2016.github.io/rBAS/reference/index.html">Reference</a> page. And click the function name. Furthermore, you can also get more examples of those algorithm application by this way. For example, the Pressure-Vessel problem solved by BSO algorithm can be found <a href="https://jywang2016.github.io/rBAS/reference/BSOoptim.html">here</a></p>
 </div>
 <div id="shiny-interface" class="section level3">
 <h3 class="hasAnchor">
@@ -281,7 +330,7 @@ test<span class="op">$</span>value
 <span class="co">#&gt; </span>
 <span class="co">#&gt;   Jiangyu Wang, Shuai Li and Xiangyuan Jiang (2018). rBAS:</span>
 <span class="co">#&gt;   Implementation of the BAS algorithm and its mutation. R package</span>
-<span class="co">#&gt;   version 0.1.5. https://github.com/jywang2016/rBAS</span>
+<span class="co">#&gt;   version 0.1.6. https://github.com/jywang2016/rBAS</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; A BibTeX entry for LaTeX users is</span>
 <span class="co">#&gt; </span>
@@ -289,7 +338,7 @@ test<span class="op">$</span>value
 <span class="co">#&gt;     title = {rBAS: Implementation of the BAS algorithm and its mutation},</span>
 <span class="co">#&gt;     author = {Jiangyu Wang and Shuai Li and Xiangyuan Jiang},</span>
 <span class="co">#&gt;     year = {2018},</span>
-<span class="co">#&gt;     note = {R package version 0.1.5},</span>
+<span class="co">#&gt;     note = {R package version 0.1.6},</span>
 <span class="co">#&gt;     url = {https://github.com/jywang2016/rBAS},</span>
 <span class="co">#&gt;   }</span></code></pre></div>
 </div>
@@ -304,12 +353,17 @@ test<span class="op">$</span>value
 <div id="bsas" class="section level3">
 <h3 class="hasAnchor">
 <a href="#bsas" class="anchor"></a>BSAS</h3>
-<p><a href="https://arxiv.org/abs/1807.10470">J. Y. Wang, and H. X. Chen, “BSAS: Beetle Swarm Antennae Search Algorithm for Optimization Problems,” arXiv:1807.10470v1.</a> If you want to find materials in Chinese about BSAS, please click <a href="https://github.com/jywang2016/BAS/blob/master/BAS_Swarm_documentation.html">here</a>.</p>
+<p><a href="https://arxiv.org/abs/1807.10470">J. Y. Wang, and H. X. Chen, “BSAS: Beetle Swarm Antennae Search Algorithm for Optimization Problems,” arXiv:1807.10470v1.</a>. Chinese Handbook of rBAS, please click <a href="https://jywang2016.github.io/rBAS_documents/">here</a>.</p>
 </div>
 <div id="bas-wpt" class="section level3">
 <h3 class="hasAnchor">
 <a href="#bas-wpt" class="anchor"></a>BAS-WPT</h3>
 <p><a href="https://arxiv.org/abs/1711.02395">X. Y. Jiang, and S. Li, “Beetle Antennae Search without Parameter Tuning (BAS-WPT) for Multi-objective Optimization,” arXiv:1711.02395v1.</a></p>
+</div>
+<div id="bso" class="section level3">
+<h3 class="hasAnchor">
+<a href="#bso" class="anchor"></a>BSO</h3>
+<p><a href="https://arxiv.org/abs/1808.00206">Wang T, Yang L, Liu Q. “Beetle Swarm Optimization Algorithm:Theory and Application,” arXiv:1808.00206v1.</a></p>
 </div>
 </div>
 <div id="license" class="section level2">

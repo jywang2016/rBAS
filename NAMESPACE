@@ -3,6 +3,7 @@
 export(BASoptim)
 export(BSAS_WPT)
 export(BSASoptim)
+export(BSOoptim)
 export(run_BAS_App)
 import(ggplot2)
 import(shiny)

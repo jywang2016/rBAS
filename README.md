@@ -10,6 +10,7 @@ rBAS <img src="man/figures/rBAS.png" align="right" />
 -   [Examples](#examples)
     -   [Michalewicz function](#michalewicz-function)
     -   [Goldstein-Price function](#goldstein-price-function)
+    -   [Mixed integer nonlinear programming](#pressure-vessel)
     -   [Implementation of BSAS](#bsas-algorithm)
     -   [Shiny interface](#shiny-interface)
 -   [To do list](#to-do-list)
@@ -19,6 +20,7 @@ rBAS <img src="man/figures/rBAS.png" align="right" />
     -   [BAS](#bas)
     -   [BSAS](#bsas)
     -   [BAS-WPT](#bas-wpt)
+    -   [BSO](#bso)
 -   [License](#license)
 
 Installation
@@ -107,7 +109,52 @@ summary(test$df)
 #> fbest  87    -none- numeric
 ```
 
-### BSAS algorithm
+### Pressure Vessel
+
+``` r
+pressure_Vessel <- list(
+  obj = function(x){
+    x1 <- floor(x[1])*0.0625
+    x2 <- floor(x[2])*0.0625
+    x3 <- x[3]
+    x4 <- x[4]
+    result <- 0.6224*x1*x3*x4 + 1.7781*x2*x3^2 +3.1611*x1^2*x4 + 19.84*x1^2*x3
+  },
+  con = function(x){
+    x1 <- floor(x[1])*0.0625
+    x2 <- floor(x[2])*0.0625
+    x3 <- x[3]
+    x4 <- x[4]
+    c(
+      0.0193*x3 - x1,
+      0.00954*x3 - x2,
+      750.0*1728.0 - pi*x3^2*x4 - 4/3*pi*x3^3
+    )
+  }
+)
+```
+
+``` r
+result <- BSASoptim(fn = pressure_Vessel$obj,
+                    k = 10,
+                    lower =c( 1, 1, 10, 10),
+                    upper = c(100, 100, 200, 200),
+                    constr = pressure_Vessel$con,
+                    n = 200,
+                    step = 100,
+                    d1 = 4,
+                    pen = 1e6,
+                    steptol = 1e-6,
+                    n_flag = 2,
+                    seed = 2,trace = FALSE)
+
+result$par
+#> [1]  14.077163   7.087842  45.335198 140.284669
+result$value
+#> [1] 6090.567
+```
+
+### BSAS/BSO and more algorithms
 
 In order to save space, the BSAS algorithm code is executed with `trace` as `FALSE` because of too much trace information. You can set `trace` to `TRUE` and observe the trace messages.
 
@@ -144,6 +191,8 @@ summary(test$df)
 #> x 202    -none- numeric
 #> f 101    -none- numeric
 ```
+
+If you want find more algorithm which is avaliable in `rBAS`.You can visit the [Reference](https://jywang2016.github.io/rBAS/reference/index.html) page. And click the function name. Furthermore, you can also get more examples by this way. For example, the Pressure-Vessel problem solved by BSO algorithm can be found [here](https://jywang2016.github.io/rBAS/reference/BSOoptim.html).
 
 ### Shiny interface
 
@@ -221,7 +270,7 @@ citation(package = 'rBAS')
 #> 
 #>   Jiangyu Wang, Shuai Li and Xiangyuan Jiang (2018). rBAS:
 #>   Implementation of the BAS algorithm and its mutation. R package
-#>   version 0.1.5. https://github.com/jywang2016/rBAS
+#>   version 0.1.6. https://github.com/jywang2016/rBAS
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
@@ -229,7 +278,7 @@ citation(package = 'rBAS')
 #>     title = {rBAS: Implementation of the BAS algorithm and its mutation},
 #>     author = {Jiangyu Wang and Shuai Li and Xiangyuan Jiang},
 #>     year = {2018},
-#>     note = {R package version 0.1.5},
+#>     note = {R package version 0.1.6},
 #>     url = {https://github.com/jywang2016/rBAS},
 #>   }
 ```
@@ -243,11 +292,15 @@ References
 
 ### BSAS
 
-[J. Y. Wang, and H. X. Chen, “BSAS: Beetle Swarm Antennae Search Algorithm for Optimization Problems,” arXiv:1807.10470v1.](https://arxiv.org/abs/1807.10470) If you want to find materials in Chinese about BSAS, please click [here](https://github.com/jywang2016/BAS/blob/master/BAS_Swarm_documentation.html).
+[J. Y. Wang, and H. X. Chen, “BSAS: Beetle Swarm Antennae Search Algorithm for Optimization Problems,” arXiv:1807.10470v1.](https://arxiv.org/abs/1807.10470). Chinese Handbook of rBAS, please click [here](https://jywang2016.github.io/rBAS_documents/).
 
 ### BAS-WPT
 
 [X. Y. Jiang, and S. Li, “Beetle Antennae Search without Parameter Tuning (BAS-WPT) for Multi-objective Optimization,” arXiv:1711.02395v1.](https://arxiv.org/abs/1711.02395)
+
+### BSO
+
+[Wang T, Yang L, Liu Q. "Beetle Swarm Optimization Algorithm:Theory and Application," arXiv:1808.00206v1.](https://arxiv.org/abs/1808.00206)
 
 License
 -------

@@ -83,13 +83,13 @@
 #'   }
 #' )
 #' result <- BSASoptim(fn = pressure_Vessel$obj,
-#'                     k = 5,
+#'                     k = 10,
 #'                     lower =c( 1, 1, 10, 10),
 #'                     upper = c(100, 100, 200, 200),
 #'                     constr = pressure_Vessel$con,
 #'                     n = 200,
 #'                     step = 100,
-#'                     d1 = 5,
+#'                     d1 = 4,
 #'                     pen = 1e6,
 #'                     steptol = 1e-6,
 #'                     n_flag = 2,

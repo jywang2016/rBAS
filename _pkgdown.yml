@@ -8,6 +8,10 @@ reference:
     contents:
       - BSASoptim
       - BSAS_WPT
+  - title: BSO
+    desc: Combination of BAS and Particle Swarm Optimization(PSO).
+    contents:
+      - BSOoptim
   - title: Shiny interface
     desc: Shiny interface for all algorithms included in `rBAS`
     contents:

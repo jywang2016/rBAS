@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rBAS</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.5</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.6</span>
       </span>
     </div>
 
@@ -274,19 +274,19 @@ optimization problems, arXiv:1710.10724v1.</p>
   }
 )
 <span class='no'>result</span> <span class='kw'>&lt;-</span> <span class='fu'>BSASoptim</span>(<span class='kw'>fn</span> <span class='kw'>=</span> <span class='no'>pressure_Vessel</span>$<span class='no'>obj</span>,
-                    <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>5</span>,
+                    <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>10</span>,
                     <span class='kw'>lower</span> <span class='kw'>=</span><span class='fu'>c</span>( <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>10</span>, <span class='fl'>10</span>),
                     <span class='kw'>upper</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>100</span>, <span class='fl'>100</span>, <span class='fl'>200</span>, <span class='fl'>200</span>),
                     <span class='kw'>constr</span> <span class='kw'>=</span> <span class='no'>pressure_Vessel</span>$<span class='no'>con</span>,
                     <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>200</span>,
                     <span class='kw'>step</span> <span class='kw'>=</span> <span class='fl'>100</span>,
-                    <span class='kw'>d1</span> <span class='kw'>=</span> <span class='fl'>5</span>,
+                    <span class='kw'>d1</span> <span class='kw'>=</span> <span class='fl'>4</span>,
                     <span class='kw'>pen</span> <span class='kw'>=</span> <span class='fl'>1e6</span>,
                     <span class='kw'>steptol</span> <span class='kw'>=</span> <span class='fl'>1e-6</span>,
                     <span class='kw'>n_flag</span> <span class='kw'>=</span> <span class='fl'>2</span>,
                     <span class='kw'>seed</span> <span class='kw'>=</span> <span class='fl'>2</span>,<span class='kw'>trace</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='no'>result</span>$<span class='no'>par</span></div><div class='output co'>#&gt; [1]  14.92195   7.87620  43.51377 159.87104</div><div class='input'><span class='no'>result</span>$<span class='no'>value</span></div><div class='output co'>#&gt; [1] 6309.406</div><div class='input'>
+<span class='no'>result</span>$<span class='no'>par</span></div><div class='output co'>#&gt; [1]  14.077163   7.087842  45.335198 140.284669</div><div class='input'><span class='no'>result</span>$<span class='no'>value</span></div><div class='output co'>#&gt; [1] 6090.567</div><div class='input'>
 <span class='co'># &gt;&gt;&gt;&gt; example with constraint: Himmelblau function &lt;&lt;&lt;&lt;</span>
 <span class='no'>himmelblau</span> <span class='kw'>&lt;-</span> <span class='fu'>list</span>(
   <span class='kw'>obj</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>x</span>){

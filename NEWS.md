@@ -1,3 +1,9 @@
+## rBAS 0.1.6
+
+### New features
+
+- Add BSO algorithm
+
 ## rBAS 0.1.5
 
 ### New features

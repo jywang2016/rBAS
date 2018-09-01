@@ -17,7 +17,9 @@ knitr::opts_chunk$set(
 -   [Examples](#examples)
     -   [Michalewicz function](#michalewicz-function)
     -   [Goldstein-Price function](#goldstein-price-function)
+    -   [Mixed integer nonlinear programming](#pressure-vessel)
     -   [Implementation of BSAS](#bsas-algorithm)
+    -   [More algorithms BAS/BSAS-WPT/BSO](#more-algorithms)
     -   [Shiny interface](#shiny-interface)
 -   [To do list](#to-do-list)
 -   [Author](#authors)
@@ -26,6 +28,7 @@ knitr::opts_chunk$set(
     -   [BAS](#bas)
     -   [BSAS](#bsas)
     -   [BAS-WPT](#bas-wpt)
+    -   [BSO](#bso)
 -   [License](#license)
 
 ## Installation
@@ -95,6 +98,49 @@ test$value
 summary(test$df)
 ```
 
+### Pressure Vessel
+
+```{r}
+pressure_Vessel <- list(
+  obj = function(x){
+    x1 <- floor(x[1])*0.0625
+    x2 <- floor(x[2])*0.0625
+    x3 <- x[3]
+    x4 <- x[4]
+    result <- 0.6224*x1*x3*x4 + 1.7781*x2*x3^2 +3.1611*x1^2*x4 + 19.84*x1^2*x3
+  },
+  con = function(x){
+    x1 <- floor(x[1])*0.0625
+    x2 <- floor(x[2])*0.0625
+    x3 <- x[3]
+    x4 <- x[4]
+    c(
+      0.0193*x3 - x1,
+      0.00954*x3 - x2,
+      750.0*1728.0 - pi*x3^2*x4 - 4/3*pi*x3^3
+    )
+  }
+)
+```
+
+```{r}
+result <- BSASoptim(fn = pressure_Vessel$obj,
+                    k = 10,
+                    lower =c( 1, 1, 10, 10),
+                    upper = c(100, 100, 200, 200),
+                    constr = pressure_Vessel$con,
+                    n = 200,
+                    step = 100,
+                    d1 = 4,
+                    pen = 1e6,
+                    steptol = 1e-6,
+                    n_flag = 2,
+                    seed = 2,trace = FALSE)
+
+result$par
+result$value
+```
+
 ### BSAS algorithm
 
 In order to save space, the BSAS algorithm code is executed with `trace` as `FALSE` because of too much trace information. You can set `trace` to `TRUE` and observe the trace messages.
@@ -122,6 +168,9 @@ test$value
 summary(test$df)
 ```
 
+### More algorithms
+
+If you want find more algorithm which is avaliable in `rBAS`.You can visit the [Reference](https://jywang2016.github.io/rBAS/reference/index.html) page. And click the function name. Furthermore, you can also get more examples of those algorithm application by this way. For example, the Pressure-Vessel problem solved by BSO algorithm can be found [here](https://jywang2016.github.io/rBAS/reference/BSOoptim.html) 
 
 ###Shiny interface
 After `rBAS 0.1.0`, [shiny](https://shiny.rstudio.com/) interface is added into `rBAS`. Now, the users only need to define
@@ -202,12 +251,16 @@ citation(package = 'rBAS')
 optimization problems,” arXiv:1710.10724v1.](https://arxiv.org/abs/1710.10724)
 
 ### BSAS
-[J. Y. Wang, and H. X. Chen, “BSAS: Beetle Swarm Antennae Search Algorithm for Optimization Problems,” arXiv:1807.10470v1.](https://arxiv.org/abs/1807.10470) If you want to find materials in Chinese about BSAS,
-please click [here](https://github.com/jywang2016/BAS/blob/master/BAS_Swarm_documentation.html).
+[J. Y. Wang, and H. X. Chen, “BSAS: Beetle Swarm Antennae Search Algorithm for Optimization Problems,” arXiv:1807.10470v1.](https://arxiv.org/abs/1807.10470). Chinese Handbook of rBAS,
+please click [here](https://jywang2016.github.io/rBAS_documents/).
 
 ### BAS-WPT
 [X. Y. Jiang, and S. Li, “Beetle Antennae Search without Parameter Tuning
 (BAS-WPT) for Multi-objective Optimization,” arXiv:1711.02395v1.](https://arxiv.org/abs/1711.02395)
+
+### BSO
+[Wang T, Yang L, Liu Q. "Beetle Swarm Optimization Algorithm:Theory and Application," arXiv:1808.00206v1.](https://arxiv.org/abs/1808.00206)
+
 
 ## License
 

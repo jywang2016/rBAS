@@ -1,6 +1,6 @@
 Package: rBAS
 Title: Implementation of the BAS algorithm and its mutation
-Version: 0.1.5
+Version: 0.1.6
 Authors@R: c(
     person("Jiangyu", "Wang", email = "jywang_2016@hust.edu.cn", role = c("aut","cre")),
     person("Shuai", "Li", email = "shuaili@polyu.edu.hk", role = c("aut")),
