@@ -12,6 +12,7 @@ rBAS <img src="man/figures/rBAS.png" align="right" />
     -   [Goldstein-Price function](#goldstein-price-function)
     -   [Mixed integer nonlinear programming](#pressure-vessel)
     -   [Implementation of BSAS](#bsas-algorithm)
+    -   [More algorithms BAS/BSAS-WPT/BSO](#more-algorithms)
     -   [Shiny interface](#shiny-interface)
 -   [To do list](#to-do-list)
 -   [Author](#authors)
@@ -154,7 +155,7 @@ result$value
 #> [1] 6090.567
 ```
 
-### BSAS/BSO and more algorithms
+### BSAS algorithm
 
 In order to save space, the BSAS algorithm code is executed with `trace` as `FALSE` because of too much trace information. You can set `trace` to `TRUE` and observe the trace messages.
 
@@ -192,7 +193,9 @@ summary(test$df)
 #> f 101    -none- numeric
 ```
 
-If you want find more algorithm which is avaliable in `rBAS`.You can visit the [Reference](https://jywang2016.github.io/rBAS/reference/index.html) page. And click the function name. Furthermore, you can also get more examples by this way. For example, the Pressure-Vessel problem solved by BSO algorithm can be found [here](https://jywang2016.github.io/rBAS/reference/BSOoptim.html).
+### More algorithms
+
+If you want find more algorithm which is avaliable in `rBAS`.You can visit the [Reference](https://jywang2016.github.io/rBAS/reference/index.html) page. And click the function name. Furthermore, you can also get more examples of those algorithm application by this way. For example, the Pressure-Vessel problem solved by BSO algorithm can be found [here](https://jywang2016.github.io/rBAS/reference/BSOoptim.html)
 
 ### Shiny interface
 
