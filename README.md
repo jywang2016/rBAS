@@ -226,7 +226,7 @@ Algorithm:
 Application:
 
 -   constrained optimization:
-    -   multi-bar mechanism optimization
+    -   ~~multi-bar mechanism optimization~~
     -   system identification for building (resistance-capacity model)
     -   assembly path planning
     -   lot-sizing problems(binary BAS)
