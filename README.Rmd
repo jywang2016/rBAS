@@ -251,7 +251,7 @@ citation(package = 'rBAS')
 optimization problems,” arXiv:1710.10724v1.](https://arxiv.org/abs/1710.10724)
 
 ### BSAS
-[J. Y. Wang, and H. X. Chen, “BSAS: Beetle Swarm Antennae Search Algorithm for Optimization Problems,” arXiv:1807.10470v1.](https://arxiv.org/abs/1807.10470). Chinese Handbook of rBAS,
+[J. Y. Wang, and H. X. Chen, “BSAS: Beetle Swarm Antennae Search Algorithm for Optimization Problems,” arXiv:1807.10470v1.](https://arxiv.org/abs/1807.10470) Chinese Handbook of rBAS,
 please click [here](https://jywang2016.github.io/rBAS_documents/).
 
 ### BAS-WPT
