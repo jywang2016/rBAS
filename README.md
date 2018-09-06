@@ -12,7 +12,7 @@ rBAS <img src="man/figures/rBAS.png" align="right" />
     -   [Goldstein-Price function](#goldstein-price-function)
     -   [Mixed integer nonlinear programming](#pressure-vessel)
     -   [Implementation of BSAS](#bsas-algorithm)
-    -   [More algorithms BAS/BSAS-WPT/BSO](#more-algorithms)
+    -   [More algorithms BAS2/BSAS-WPT/BSO](#more-algorithms)
     -   [Shiny interface](#shiny-interface)
 -   [To do list](#to-do-list)
 -   [Author](#authors)
@@ -219,7 +219,7 @@ Algorithm:
 -   ~~add implement of BSAS algorithm~~
 -   ~~add BAS-WPT(without parameter tuning)(Xiangyuan Jiang)~~
 -   add binary BAS algorithm (Yue Ruan)
--   add second-order BAS algorithm (Xiaoxiao Li)
+-   ~~add second-order BAS algorithm (Xiaoxiao Li)~~
 -   ~~add BSO(Beetle Swarm Optimizaiton) (Tiantian Wang)~~
 -   ...
 

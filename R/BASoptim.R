@@ -17,7 +17,7 @@
 #' @param l1 initial position jitter factor.Default = 0.\deqn{x = x - step * dir * sign(fn(left) - fn(right)) + l *random(npars)}
 #' @param eta_l attenuation coefficient of jitter factor.\deqn{l^t = \eta_l * l^{t-1} + l_0}
 #' @param step initial step-size of beetle
-#' @param eta_step attenuation coefficient of step-size.\deqn{step^t = \eta_step * step^{t-1}}
+#' @param eta_step attenuation coefficient of step-size.\deqn{step^t = \eta_{step} * step^{t-1}}
 #' @param n iterations times
 #' @param seed random seed; default = NULL ; The results of BAS depend on random init value and random directions.
 #' Therefore, if you set a random seed, for example,\code{seed = 1}, the results will remain the same
@@ -42,7 +42,7 @@
 #' }
 #' BASoptim(fn = mich,
 #'          lower = c(-6,0), upper = c(-1,2),
-#'          seed = 1, n = 100)
+#'          seed = 1, n = 100,trace = FALSE)
 #' #======== examples end =======================
 #' @importFrom stats runif
 #' @export
@@ -123,7 +123,7 @@ BASoptim <- function(fn,init = NULL,
     xright <- handle.bounds(x - dir*d)#x - dir * d
     fright <- fnew(xright)
 
-    #random work
+    #random walk
     w <- l*runif(min = -1,max = 1, n = npar)
     x <- handle.bounds(u = x - step * dir * sign(fleft - fright) + w)
     f <- fnew(x)

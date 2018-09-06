@@ -40,7 +40,7 @@ zero. More specifically, \deqn{d^t = \eta_d * d^{t-1} + d_0}where attenuation co
 
 \item{step}{initial step-size of beetle}
 
-\item{eta_step}{attenuation coefficient of step-size.\deqn{step^t = \eta_step * step^{t-1}}}
+\item{eta_step}{attenuation coefficient of step-size.\deqn{step^t = \eta_{step} * step^{t-1}}}
 
 \item{n}{iterations times}
 
@@ -72,7 +72,7 @@ mich <- function(x){
 }
 BASoptim(fn = mich,
          lower = c(-6,0), upper = c(-1,2),
-         seed = 1, n = 100)
+         seed = 1, n = 100,trace = FALSE)
 #======== examples end =======================
 }
 \references{

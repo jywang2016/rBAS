@@ -3,6 +3,7 @@ reference:
     desc: Beetle Antennae Search (BAS) algorithm
     contents:
       - BASoptim
+      - BASoptim2
   - title: BSAS
     desc: Beetle Swarm Antennae Search (BSAS) algorithm
     contents:

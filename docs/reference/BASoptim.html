@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rBAS</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.6</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.7</span>
       </span>
     </div>
 
@@ -175,7 +175,7 @@ zero. More specifically, $$d^t = \eta_d * d^{t-1} + d_0$$where attenuation coeff
     </tr>
     <tr>
       <th>eta_step</th>
-      <td><p>attenuation coefficient of step-size.$$step^t = \eta_step * step^{t-1}$$</p></td>
+      <td><p>attenuation coefficient of step-size.$$step^t = \eta_{step} * step^{t-1}$$</p></td>
     </tr>
     <tr>
       <th>n</th>
@@ -223,93 +223,7 @@ optimization problems, arXiv:1710.10724v1.</p>
 }
 <span class='fu'>BASoptim</span>(<span class='kw'>fn</span> <span class='kw'>=</span> <span class='no'>mich</span>,
          <span class='kw'>lower</span> <span class='kw'>=</span> <span class='fu'>c</span>(-<span class='fl'>6</span>,<span class='fl'>0</span>), <span class='kw'>upper</span> <span class='kw'>=</span> <span class='fu'>c</span>(-<span class='fl'>1</span>,<span class='fl'>2</span>),
-         <span class='kw'>seed</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>100</span>)</div><div class='output co'>#&gt; Iter:  0  xbest:  [ -4.672457 0.7442478 ], fbest=  -6.583555e-05 
-#&gt; Iter:  1  xbest:  [ -4.813013 0 ], fbest=  -0.09012505 
-#&gt; Iter:  2  xbest:  [ -4.813013 0 ], fbest=  -0.09012505 
-#&gt; Iter:  3  xbest:  [ -5.042063 0.5342482 ], fbest=  -0.5335012 
-#&gt; Iter:  4  xbest:  [ -5.042063 0.5342482 ], fbest=  -0.5335012 
-#&gt; Iter:  5  xbest:  [ -5.042063 0.5342482 ], fbest=  -0.5335012 
-#&gt; Iter:  6  xbest:  [ -5.042063 0.5342482 ], fbest=  -0.5335012 
-#&gt; Iter:  7  xbest:  [ -5.042063 0.5342482 ], fbest=  -0.5335012 
-#&gt; Iter:  8  xbest:  [ -5.042063 0.5342482 ], fbest=  -0.5335012 
-#&gt; Iter:  9  xbest:  [ -5.042063 0.5342482 ], fbest=  -0.5335012 
-#&gt; Iter:  10  xbest:  [ -5.042063 0.5342482 ], fbest=  -0.5335012 
-#&gt; Iter:  11  xbest:  [ -5.042063 0.5342482 ], fbest=  -0.5335012 
-#&gt; Iter:  12  xbest:  [ -5.042063 0.5342482 ], fbest=  -0.5335012 
-#&gt; Iter:  13  xbest:  [ -5.042063 0.5342482 ], fbest=  -0.5335012 
-#&gt; Iter:  14  xbest:  [ -5.042063 0.5342482 ], fbest=  -0.5335012 
-#&gt; Iter:  15  xbest:  [ -5.042063 0.5342482 ], fbest=  -0.5335012 
-#&gt; Iter:  16  xbest:  [ -5.042063 0.5342482 ], fbest=  -0.5335012 
-#&gt; Iter:  17  xbest:  [ -5.042063 0.5342482 ], fbest=  -0.5335012 
-#&gt; Iter:  18  xbest:  [ -5.042063 0.5342482 ], fbest=  -0.5335012 
-#&gt; Iter:  19  xbest:  [ -5.042063 0.5342482 ], fbest=  -0.5335012 
-#&gt; Iter:  20  xbest:  [ -5.042063 0.5342482 ], fbest=  -0.5335012 
-#&gt; Iter:  21  xbest:  [ -5.042063 0.5342482 ], fbest=  -0.5335012 
-#&gt; Iter:  22  xbest:  [ -5.042063 0.5342482 ], fbest=  -0.5335012 
-#&gt; Iter:  23  xbest:  [ -5.042063 0.5342482 ], fbest=  -0.5335012 
-#&gt; Iter:  24  xbest:  [ -5.042063 0.5342482 ], fbest=  -0.5335012 
-#&gt; Iter:  25  xbest:  [ -5.042063 0.5342482 ], fbest=  -0.5335012 
-#&gt; Iter:  26  xbest:  [ -5.042063 0.5342482 ], fbest=  -0.5335012 
-#&gt; Iter:  27  xbest:  [ -5.042063 0.5342482 ], fbest=  -0.5335012 
-#&gt; Iter:  28  xbest:  [ -5.042063 0.5342482 ], fbest=  -0.5335012 
-#&gt; Iter:  29  xbest:  [ -5.202284 1.495041 ], fbest=  -0.8020784 
-#&gt; Iter:  30  xbest:  [ -5.202284 1.495041 ], fbest=  -0.8020784 
-#&gt; Iter:  31  xbest:  [ -5.129357 1.497786 ], fbest=  -0.8663391 
-#&gt; Iter:  32  xbest:  [ -5.129357 1.497786 ], fbest=  -0.8663391 
-#&gt; Iter:  33  xbest:  [ -5.129357 1.497786 ], fbest=  -0.8663391 
-#&gt; Iter:  34  xbest:  [ -4.952607 1.215027 ], fbest=  -0.9636234 
-#&gt; Iter:  35  xbest:  [ -4.952607 1.215027 ], fbest=  -0.9636234 
-#&gt; Iter:  36  xbest:  [ -4.952607 1.215027 ], fbest=  -0.9636234 
-#&gt; Iter:  37  xbest:  [ -4.952607 1.215027 ], fbest=  -0.9636234 
-#&gt; Iter:  38  xbest:  [ -4.952607 1.215027 ], fbest=  -0.9636234 
-#&gt; Iter:  39  xbest:  [ -4.708649 1.551266 ], fbest=  -0.9856311 
-#&gt; Iter:  40  xbest:  [ -4.708649 1.551266 ], fbest=  -0.9856311 
-#&gt; Iter:  41  xbest:  [ -4.794253 1.566632 ], fbest=  -1.04688 
-#&gt; Iter:  42  xbest:  [ -4.885639 1.532165 ], fbest=  -1.450188 
-#&gt; Iter:  43  xbest:  [ -4.885639 1.532165 ], fbest=  -1.450188 
-#&gt; Iter:  44  xbest:  [ -4.944315 1.529891 ], fbest=  -1.859384 
-#&gt; Iter:  45  xbest:  [ -4.944315 1.529891 ], fbest=  -1.859384 
-#&gt; Iter:  46  xbest:  [ -4.944315 1.529891 ], fbest=  -1.859384 
-#&gt; Iter:  47  xbest:  [ -4.944315 1.529891 ], fbest=  -1.859384 
-#&gt; Iter:  48  xbest:  [ -4.944315 1.529891 ], fbest=  -1.859384 
-#&gt; Iter:  49  xbest:  [ -4.95542 1.558809 ], fbest=  -1.951293 
-#&gt; Iter:  50  xbest:  [ -4.95542 1.558809 ], fbest=  -1.951293 
-#&gt; Iter:  51  xbest:  [ -4.95542 1.558809 ], fbest=  -1.951293 
-#&gt; Iter:  52  xbest:  [ -4.95542 1.558809 ], fbest=  -1.951293 
-#&gt; Iter:  53  xbest:  [ -4.95542 1.558809 ], fbest=  -1.951293 
-#&gt; Iter:  54  xbest:  [ -4.95542 1.558809 ], fbest=  -1.951293 
-#&gt; Iter:  55  xbest:  [ -4.95542 1.558809 ], fbest=  -1.951293 
-#&gt; Iter:  56  xbest:  [ -4.95542 1.558809 ], fbest=  -1.951293 
-#&gt; Iter:  57  xbest:  [ -4.95542 1.558809 ], fbest=  -1.951293 
-#&gt; Iter:  58  xbest:  [ -4.95542 1.558809 ], fbest=  -1.951293 
-#&gt; Iter:  59  xbest:  [ -4.95542 1.558809 ], fbest=  -1.951293 
-#&gt; Iter:  60  xbest:  [ -4.95542 1.558809 ], fbest=  -1.951293 
-#&gt; Iter:  61  xbest:  [ -4.95542 1.558809 ], fbest=  -1.951293 
-#&gt; Iter:  62  xbest:  [ -4.95542 1.558809 ], fbest=  -1.951293 
-#&gt; Iter:  63  xbest:  [ -4.95542 1.558809 ], fbest=  -1.951293 
-#&gt; Iter:  64  xbest:  [ -4.95542 1.558809 ], fbest=  -1.951293 
-#&gt; Iter:  65  xbest:  [ -4.95535 1.568968 ], fbest=  -1.956776 
-#&gt; Iter:  66  xbest:  [ -4.95535 1.568968 ], fbest=  -1.956776 
-#&gt; Iter:  67  xbest:  [ -4.95535 1.568968 ], fbest=  -1.956776 
-#&gt; Iter:  68  xbest:  [ -4.96859 1.56072 ], fbest=  -1.963119 
-#&gt; Iter:  69  xbest:  [ -4.96859 1.56072 ], fbest=  -1.963119 
-#&gt; Iter:  70  xbest:  [ -4.96859 1.56072 ], fbest=  -1.963119 
-#&gt; Iter:  71  xbest:  [ -4.96859 1.56072 ], fbest=  -1.963119 
-#&gt; Iter:  72  xbest:  [ -4.96859 1.56072 ], fbest=  -1.963119 
-#&gt; Iter:  73  xbest:  [ -4.96859 1.56072 ], fbest=  -1.963119 
-#&gt; Iter:  74  xbest:  [ -4.96859 1.56072 ], fbest=  -1.963119 
-#&gt; Iter:  75  xbest:  [ -4.962715 1.574144 ], fbest=  -1.96635 
-#&gt; Iter:  76  xbest:  [ -4.962715 1.574144 ], fbest=  -1.96635 
-#&gt; Iter:  77  xbest:  [ -4.962715 1.574144 ], fbest=  -1.96635 
-#&gt; Iter:  78  xbest:  [ -4.962715 1.574144 ], fbest=  -1.96635 
-#&gt; Iter:  79  xbest:  [ -4.962715 1.574144 ], fbest=  -1.96635 
-#&gt; Iter:  80  xbest:  [ -4.964687 1.575415 ], fbest=  -1.966817 
-#&gt; Iter:  81  xbest:  [ -4.964687 1.575415 ], fbest=  -1.966817 
-#&gt; Iter:  82  xbest:  [ -4.964687 1.575415 ], fbest=  -1.966817 
-#&gt; Iter:  83  xbest:  [ -4.964687 1.575415 ], fbest=  -1.966817 
-#&gt; Iter:  84  xbest:  [ -4.964687 1.575415 ], fbest=  -1.966817 
-#&gt; Iter:  85  xbest:  [ -4.964687 1.575415 ], fbest=  -1.966817 
-#&gt; Iter:  86  xbest:  [ -4.964687 1.575415 ], fbest=  -1.966817 </div><div class='output co'>#&gt; <span class='message'>----step &lt; steptol---------stop the iteration------</span></div><div class='output co'>#&gt; $par
+         <span class='kw'>seed</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>100</span>,<span class='kw'>trace</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; $par
 #&gt; [1] -4.964687  1.575415
 #&gt; 
 #&gt; $value

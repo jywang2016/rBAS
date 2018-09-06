@@ -1,3 +1,13 @@
+## rBAS 0.1.7
+
+### New features
+
+- Add BAS with momentum (also known as second-order BAS)
+
+### Bug fixes
+
+- `BASoptim2.R`: add the minimal resolution of step-size
+
 ## rBAS 0.1.6
 
 ### New features
