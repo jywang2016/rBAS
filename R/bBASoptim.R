@@ -18,6 +18,11 @@
 #' @param c a constant belongs to (0,1).\deqn{V_i=wV_i \pm c*rand}
 #' @param vmax maximum speed of beetle
 #' @param n iterations times
+#' @param resolution If there are non-integer parameters in the optimization problem, resolution should be taken into consideration.
+#' You can use resolution parms to reduce the error generated in the process of translating the double(decimal) to binary. More specifically,
+#' you can set resolution as c(1,1,1,1,1) when you deal with lot-sizing problem. But you should make the resolution large enough when
+#' dealing with Michalewicz function. If the parameter belongs to [-2.048,2.048], bBAS will search binary number in [0, 4096] and translate
+#' it into decimal when you set resolution as 1000. The examples below can be referenced.
 #' @param seed random seed; default = NULL ; The results of BAS depend on random init value and random directions.
 #' Therefore, if you set a random seed, for example,\code{seed = 1}, the results will remain the same
 #' no matter how many times you repeat your experiments.

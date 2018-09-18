@@ -42,6 +42,12 @@ Therefore, if you set a random seed, for example,\code{seed = 1}, the results wi
 no matter how many times you repeat your experiments.}
 
 \item{trace}{default = 20; it means the process is printed to the console every 10 iterations.}
+
+\item{resolution}{If there are non-integer parameters in the optimization problem, resolution should be taken into consideration.
+You can use resolution parms to reduce the error generated in the process of translating the double(decimal) to binary. More specifically,
+you can set resolution as c(1,1,1,1,1) when you deal with lot-sizing problem. But you should make the resolution large enough when
+dealing with Michalewicz function. If the parameter belongs to [-2.048,2.048], bBAS will search binary number in [0, 4096] and translate
+it into decimal when you set resolution as 1000. The examples below can be referenced.}
 }
 \value{
 A list including best beetle position (parameters) and corresponding objective function value.
