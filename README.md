@@ -197,7 +197,7 @@ summary(test$df)
 
 If you want find **more algorithm** which is avaliable in `rBAS`.You can visit the [Reference](https://jywang2016.github.io/rBAS/reference/index.html) page. And click the function name. Furthermore, you can also get more examples of those algorithm application by this way. For example, the Pressure-Vessel problem solved by BSO algorithm can be found [here](https://jywang2016.github.io/rBAS/reference/BSOoptim.html).
 
-BTW, in `rBAS 0.1.8`, [bBAS]((https://jywang2016.github.io/rBAS/reference/bBASoptim.html)) which is designed for binary-programming is added.
+BTW, in `rBAS 0.1.8`, [bBAS](https://jywang2016.github.io/rBAS/reference/bBASoptim.html) which is designed for binary-programming is added.
 
 ### Shiny interface
 
