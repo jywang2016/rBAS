@@ -1,3 +1,9 @@
+## rBAS 0.1.8
+
+### New features
+
+- Add bBAS for binary-integer-problem
+
 ## rBAS 0.1.7
 
 ### New features

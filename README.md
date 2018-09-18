@@ -12,7 +12,7 @@ rBAS <img src="man/figures/rBAS.png" align="right" />
     -   [Goldstein-Price function](#goldstein-price-function)
     -   [Mixed integer nonlinear programming](#pressure-vessel)
     -   [Implementation of BSAS](#bsas-algorithm)
-    -   [More algorithms BAS2/BSAS-WPT/BSO](#more-algorithms)
+    -   [More algorithms bBAS/BSAS-WPT/BSO](#more-algorithms)
     -   [Shiny interface](#shiny-interface)
 -   [To do list](#to-do-list)
 -   [Author](#authors)
@@ -195,7 +195,9 @@ summary(test$df)
 
 ### More algorithms
 
-If you want find more algorithm which is avaliable in `rBAS`.You can visit the [Reference](https://jywang2016.github.io/rBAS/reference/index.html) page. And click the function name. Furthermore, you can also get more examples of those algorithm application by this way. For example, the Pressure-Vessel problem solved by BSO algorithm can be found [here](https://jywang2016.github.io/rBAS/reference/BSOoptim.html)
+If you want find **more algorithm** which is avaliable in `rBAS`.You can visit the [Reference](https://jywang2016.github.io/rBAS/reference/index.html) page. And click the function name. Furthermore, you can also get more examples of those algorithm application by this way. For example, the Pressure-Vessel problem solved by BSO algorithm can be found [here](https://jywang2016.github.io/rBAS/reference/BSOoptim.html).
+
+BTW, in `rBAS 0.1.8`, [bBAS]((https://jywang2016.github.io/rBAS/reference/bBASoptim.html)) which is designed for binary-programming is added.
 
 ### Shiny interface
 
@@ -218,7 +220,7 @@ Algorithm:
 
 -   ~~add implement of BSAS algorithm~~
 -   ~~add BAS-WPT(without parameter tuning)(Xiangyuan Jiang)~~
--   add binary BAS algorithm (Yue Ruan)
+-   ~~add binary BAS algorithm (Yue Ruan)~~
 -   ~~add second-order BAS algorithm (Xiaoxiao Li)~~
 -   ~~add BSO(Beetle Swarm Optimizaiton) (Tiantian Wang)~~
 -   ...
@@ -229,7 +231,7 @@ Application:
     -   ~~multi-bar mechanism optimization~~
     -   system identification for building (resistance-capacity model)
     -   assembly path planning
-    -   lot-sizing problems(binary BAS)
+    -   ~~lot-sizing problems(binary BAS)~~
 -   tests
     -   tests for more than 20 benchmark functions
 
@@ -273,7 +275,7 @@ citation(package = 'rBAS')
 #> 
 #>   Jiangyu Wang, Shuai Li and Xiangyuan Jiang (2018). rBAS:
 #>   Implementation of the BAS algorithm and its mutation. R package
-#>   version 0.1.6. https://github.com/jywang2016/rBAS
+#>   version 0.1.8. https://github.com/jywang2016/rBAS
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
@@ -281,7 +283,7 @@ citation(package = 'rBAS')
 #>     title = {rBAS: Implementation of the BAS algorithm and its mutation},
 #>     author = {Jiangyu Wang and Shuai Li and Xiangyuan Jiang},
 #>     year = {2018},
-#>     note = {R package version 0.1.6},
+#>     note = {R package version 0.1.8},
 #>     url = {https://github.com/jywang2016/rBAS},
 #>   }
 ```
