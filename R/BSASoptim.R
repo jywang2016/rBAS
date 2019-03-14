@@ -162,14 +162,45 @@ BSASoptim <- function(fn,init = NULL,
   d <- d1
   #d <- step/c2
   l <- l1
-  npar <- length(lower)
+
   if(is.null(init)){
+    #stop('Please initialize parameters : init ')
+    if(is.null(lower) & is.null(upper)){
+      stop('Please specify at least one of the init, lower or upper.\n If one of the bound is infinite, please specify init!')
+    }else if(is.null(lower)){
+      npar <- length(upper)
+      lower <- rep(-Inf,npar)
+      warning('Please specify init when your bound is NULL or INFINITE')
+    }else if(is.null(upper)){
+      npar <- length(lower)
+      upper <- rep(Inf,npar)
+      warning('Please specify init when your bound is NULL or INFINITE')
+    }else{
+      if(!(length(lower) ==length(upper))){
+        stop('Please check the length of lower and upper!')
+      }else{
+        npar <- length(lower)
+      }
+    }
     x0 <- runif(min = lower, max = upper, n = npar)
+
   }else{
     x0 <- init
+    npar <- length(init)
+  }
+  if(is.null(upper)){
+    upper <- rep(Inf,npar)
+  }
+  if(is.null(lower)){
+    lower <- rep(-Inf,npar)
+  }
+  if(!(length(x0) == npar & length(lower) ==npar & length(upper)==npar)){
+    stop('Please check the length of init, lower and upper!')
   }
   if(!is.null(names(lower))){
     names(x0) <- names(lower)
+  }else if(!is.null(names(upper))){
+    names(x0) <- names(upper)
   }
 
   len <- length(x0)
@@ -225,7 +256,7 @@ BSASoptim <- function(fn,init = NULL,
     dir <- runif(min = -1, max = 1, n = npar*k)
     dir <- matrix(dir,nrow = k,byrow = T)
     dir <- apply(dir,1,fnor)
-
+    if(npar == 1) dir <- matrix(dir, ncol = k)
     xleft <- handle.bounds(x + dir * d)#x + dir * d #
     rownames(xleft) <- parname
     fleft <- apply(xleft,2,fnew)
